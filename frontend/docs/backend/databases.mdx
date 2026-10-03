@@ -1,0 +1,50 @@
+---
+title: "Bancos de dados"
+sidebar_position: 6
+description: "Modelagem, SQL, NoSQL, índices e transações."
+---
+
+<TechIcon icon="postgresql/postgresql-original" alt="Bancos de dados" />
+
+<Badge color="gray">em construção</Badge>
+
+:::info[Sobre]
+Modelagem, SQL, NoSQL, índices e transações.
+:::
+
+## Introdução
+
+> Espaço reservado para a introdução sobre **Bancos de dados**.
+
+## Instalação / Configuração
+
+:::note
+Documente aqui os passos de instalação e configuração. Use `<Tabs>` para separar por sistema operacional.
+:::
+
+## Comandos principais
+
+```sql title="Exemplo: Bancos de dados"
+CREATE TABLE usuarios (
+  id SERIAL PRIMARY KEY,
+  nome TEXT NOT NULL,
+  criado_em TIMESTAMPTZ DEFAULT now()
+);
+
+SELECT nome FROM usuarios WHERE criado_em > now() - INTERVAL '7 days';
+```
+
+## Boas práticas
+
+:::tip
+Liste aqui as boas práticas recomendadas.
+:::
+
+## Exemplos práticos
+
+- [ ] Exemplo 1
+- [ ] Exemplo 2
+
+## Links úteis
+
+- [Documentação oficial](https://www.postgresql.org/docs/)

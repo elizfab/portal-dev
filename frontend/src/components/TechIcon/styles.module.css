@@ -1,0 +1,8 @@
+.icon {
+  display: block;
+  margin: 0.5rem 0 1.5rem;
+  padding: 0.75rem;
+  border-radius: 1rem;
+  background: var(--pd-surface);
+  border: 1px solid var(--pd-border);
+}

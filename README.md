@@ -1,5 +1,5 @@
 <h1>
-    <a href="https://github.com/org-elizfab/00.dev-portal">
+    <a href="https://github.com/elizfab/portal-dev">
         <img align="center" width="40px" src=".github/assets/images/logo.png">
     </a>
     <span>Dev Portal</span>
@@ -7,7 +7,7 @@
 
 ### Confira meu caderno de estudos:
 
-[![portfolio](https://img.shields.io/badge/Caderno_de_Estudos_-_portal_dev-F98855?style=for-the-badge&logo=ko-fi&logoColor=white)]()
+[![portfolio](https://img.shields.io/badge/Caderno_de_Estudos_-_portal_dev-F98855?style=for-the-badge&logo=ko-fi&logoColor=white)](https://elizfab.github.io/portal-dev/)
 
 ## Sobre
 
@@ -110,6 +110,15 @@ Repositório de manual de estudos com documentação organizada por categorias e
   </tbody>
 </table>
 
-## Contribuindo
+## Portal (Docusaurus)
 
-Este repositório será migrado para um site [Docusaurus](https://docusaurus.io/) futuramente. Por isso, a estrutura de pastas e arquivos foi pensada para facilitar essa migração.
+O site fica em [`frontend/`](./frontend/) e é publicado no GitHub Pages a cada push na `main`
+(workflow em [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml)).
+
+```bash
+cd frontend
+npm install
+npm start      # http://localhost:3000/portal-dev/
+```
+
+Veja [`frontend/README.md`](./frontend/README.md) para a estrutura e o modelo de página.

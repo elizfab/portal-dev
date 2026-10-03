@@ -1,0 +1,46 @@
+---
+title: "EC2"
+sidebar_position: 1
+description: "Máquinas virtuais escaláveis na AWS."
+---
+
+<TechIcon icon="amazonwebservices/amazonwebservices-original-wordmark" alt="EC2" />
+
+<Badge color="gray">em construção</Badge>
+
+:::info[Sobre]
+Máquinas virtuais escaláveis na AWS.
+:::
+
+## Introdução
+
+> Espaço reservado para a introdução sobre **EC2**.
+
+## Instalação / Configuração
+
+:::note
+Documente aqui os passos de instalação e configuração. Use `<Tabs>` para separar por sistema operacional.
+:::
+
+## Comandos principais
+
+```bash title="Exemplo: EC2"
+aws ec2 describe-instances --query "Reservations[].Instances[].[InstanceId,State.Name]" --output table
+aws ec2 start-instances --instance-ids i-0123456789abcdef0
+aws ec2 stop-instances --instance-ids i-0123456789abcdef0
+```
+
+## Boas práticas
+
+:::tip
+Liste aqui as boas práticas recomendadas.
+:::
+
+## Exemplos práticos
+
+- [ ] Exemplo 1
+- [ ] Exemplo 2
+
+## Links úteis
+
+- [Documentação oficial](https://docs.aws.amazon.com/ec2/)

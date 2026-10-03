@@ -1,0 +1,24 @@
+.badge {
+  --badge-color: var(--pd-orange);
+  display: inline-flex;
+  align-items: center;
+  padding: 0.05rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  color: var(--badge-color);
+  background: color-mix(in srgb, var(--badge-color) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--badge-color) 40%, transparent);
+}
+
+.orange { --badge-color: var(--pd-orange); }
+.pink { --badge-color: var(--pd-pink); }
+.red { --badge-color: var(--pd-red); }
+.purple { --badge-color: var(--pd-purple); }
+.green { --badge-color: var(--pd-green); }
+.blue { --badge-color: var(--pd-blue); }
+.cyan { --badge-color: var(--pd-cyan); }
+.gray { --badge-color: var(--ifm-color-emphasis-600); }

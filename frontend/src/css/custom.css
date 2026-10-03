@@ -1,0 +1,377 @@
+/**
+ * Portal Dev — tema global
+ * Cor principal: laranja do logo (#F75F00) + paleta de apoio para
+ * alertas, código, badges e categorias.
+ */
+
+/* ---------- Paleta ---------- */
+:root {
+  /* Marca */
+  --pd-orange: #f75f00;
+  --pd-pink: #e8367a;
+  --pd-red: #e5383b;
+  --pd-purple: #8b5cf6;
+  --pd-green: #16a34a;
+  --pd-blue: #2f80ed;
+  --pd-cyan: #0ea5b7;
+  --pd-yellow: #eab308;
+
+  --ifm-color-primary: #f75f00;
+  --ifm-color-primary-dark: #de5600;
+  --ifm-color-primary-darker: #d25100;
+  --ifm-color-primary-darkest: #ad4300;
+  --ifm-color-primary-light: #ff6d12;
+  --ifm-color-primary-lighter: #ff761f;
+  --ifm-color-primary-lightest: #ff8f47;
+
+  /* Tipografia */
+  --ifm-font-family-base: 'Open Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ifm-heading-font-family: 'Open Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --ifm-heading-font-weight: 700;
+  --ifm-line-height-base: 1.7;
+  --ifm-code-font-size: 90%;
+
+  /* Superfícies */
+  --ifm-background-color: #ffffff;
+  --pd-surface: #fff7f2;
+  --pd-border: #f1e4dc;
+  --ifm-navbar-shadow: 0 1px 0 var(--pd-border);
+  --ifm-global-radius: 0.6rem;
+  --ifm-code-border-radius: 0.4rem;
+  --ifm-link-color: #d25100;
+  --ifm-toc-border-color: var(--pd-border);
+
+  /* Código */
+  --docusaurus-highlighted-code-line-bg: rgba(247, 95, 0, 0.12);
+  --pd-code-error-bg: rgba(229, 56, 59, 0.14);
+  --pd-code-success-bg: rgba(22, 163, 74, 0.14);
+  --pd-inline-code-color: #c2185b;
+  --pd-inline-code-bg: #fdf0f5;
+
+  /* Alertas (admonitions) */
+  --ifm-color-info: var(--pd-blue);
+  --ifm-color-success: var(--pd-green);
+  --ifm-color-warning: var(--pd-orange);
+  --ifm-color-danger: var(--pd-red);
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #ff7a29;
+  --ifm-color-primary-dark: #ff680f;
+  --ifm-color-primary-darker: #ff5f02;
+  --ifm-color-primary-darkest: #d44e00;
+  --ifm-color-primary-light: #ff8c43;
+  --ifm-color-primary-lighter: #ff9550;
+  --ifm-color-primary-lightest: #ffb07d;
+
+  --pd-pink: #f472b6;
+  --pd-red: #f87171;
+  --pd-purple: #a78bfa;
+  --pd-green: #4ade80;
+  --pd-blue: #60a5fa;
+  --pd-cyan: #22d3ee;
+  --pd-yellow: #facc15;
+
+  --ifm-background-color: #141416;
+  --ifm-background-surface-color: #1b1b1f;
+  --ifm-navbar-background-color: rgba(20, 20, 22, 0.85);
+  --ifm-footer-background-color: #0e0e10;
+  --pd-surface: #1d1d22;
+  --pd-border: #2c2c33;
+  --ifm-link-color: #ff8c43;
+
+  --docusaurus-highlighted-code-line-bg: rgba(255, 122, 41, 0.18);
+  --pd-code-error-bg: rgba(248, 113, 113, 0.18);
+  --pd-code-success-bg: rgba(74, 222, 128, 0.16);
+  --pd-inline-code-color: #f9a8d4;
+  --pd-inline-code-bg: #2a1d26;
+}
+
+/* ---------- Base ---------- */
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(247, 95, 0, 0.25);
+}
+
+.markdown h1:first-child {
+  --ifm-h1-font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.markdown h2:not([class*='cardTitle']) {
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--pd-border);
+  margin-top: 2.5rem;
+}
+
+.markdown h2:not([class*='cardTitle'])::before {
+  content: '';
+  display: inline-block;
+  width: 0.35rem;
+  height: 1.1em;
+  margin-right: 0.6rem;
+  vertical-align: -0.15em;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--pd-orange), var(--pd-pink));
+}
+
+.markdown a:not(.card):not(.button) {
+  text-underline-offset: 3px;
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  backdrop-filter: blur(10px);
+}
+
+.navbar__title {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.navbar__logo img {
+  height: 1.9rem;
+}
+
+.header-github-link::before {
+  content: '';
+  display: flex;
+  width: 24px;
+  height: 24px;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
+    no-repeat;
+  transition: opacity 0.2s;
+}
+
+.header-github-link:hover::before {
+  opacity: 0.6;
+}
+
+[data-theme='dark'] .header-github-link::before {
+  filter: invert(1);
+}
+
+/* ---------- Announcement bar ---------- */
+div.theme-announcement-bar {
+  background: linear-gradient(90deg, var(--pd-orange), var(--pd-pink));
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ---------- Sidebar ---------- */
+.menu__link--active:not(.menu__link--sublist) {
+  font-weight: 700;
+  background: rgba(247, 95, 0, 0.1);
+  border-left: 3px solid var(--ifm-color-primary);
+  border-radius: 0 var(--ifm-global-radius) var(--ifm-global-radius) 0;
+}
+
+.menu__list-item-collapsible--active,
+.menu__link--sublist.menu__link--active {
+  color: var(--ifm-color-primary);
+}
+
+/* ---------- Código ---------- */
+code {
+  border: none;
+}
+
+:not(pre) > code {
+  color: var(--pd-inline-code-color);
+  background: var(--pd-inline-code-bg);
+  padding: 0.1rem 0.35rem;
+  font-weight: 600;
+}
+
+.theme-code-block {
+  border: 1px solid var(--pd-border);
+  box-shadow: 0 6px 20px -12px rgba(0, 0, 0, 0.25);
+}
+
+div[class*='codeBlockTitle'] {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--pd-border) !important;
+}
+
+div[class*='codeBlockTitle']::before {
+  content: '● ● ●';
+  margin-right: 0.8rem;
+  letter-spacing: 0.1rem;
+  background: linear-gradient(90deg, #ff5f57 0 33%, #febc2e 33% 66%, #28c840 66%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Mesmo layout do destaque padrão do tema. */
+.code-block-error-line,
+.code-block-success-line {
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+/* Com showLineNumbers cada linha é uma table-row: o CSS do tema fica em
+   cascade layers e perderia para as regras acima, então restauramos aqui. */
+[class*='codeLine'].code-block-error-line,
+[class*='codeLine'].code-block-success-line {
+  display: table-row;
+  margin: 0;
+  padding: 0;
+}
+
+.code-block-error-line {
+  background-color: var(--pd-code-error-bg);
+  box-shadow: inset 3px 0 0 var(--pd-red);
+}
+
+.code-block-success-line {
+  background-color: var(--pd-code-success-bg);
+  box-shadow: inset 3px 0 0 var(--pd-green);
+}
+
+.theme-code-block-highlighted-line {
+  box-shadow: inset 3px 0 0 var(--ifm-color-primary);
+}
+
+kbd {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.8em;
+  padding: 0.1rem 0.45rem;
+  border-radius: 0.35rem;
+  border: 1px solid var(--pd-border);
+  border-bottom-width: 3px;
+  background: var(--pd-surface);
+  box-shadow: none;
+}
+
+/* ---------- Alertas (admonitions) ---------- */
+.theme-admonition {
+  border-left-width: 5px;
+  border-radius: var(--ifm-global-radius);
+  box-shadow: 0 4px 16px -10px rgba(0, 0, 0, 0.25);
+}
+
+.theme-admonition-note {
+  --ifm-alert-background-color: rgba(139, 92, 246, 0.1);
+  --ifm-alert-border-color: var(--pd-purple);
+  --ifm-alert-foreground-color: var(--ifm-font-color-base);
+}
+
+.theme-admonition-tip {
+  --ifm-alert-background-color: rgba(22, 163, 74, 0.1);
+  --ifm-alert-border-color: var(--pd-green);
+  --ifm-alert-foreground-color: var(--ifm-font-color-base);
+}
+
+.theme-admonition-info {
+  --ifm-alert-background-color: rgba(47, 128, 237, 0.1);
+  --ifm-alert-border-color: var(--pd-blue);
+  --ifm-alert-foreground-color: var(--ifm-font-color-base);
+}
+
+.theme-admonition-warning {
+  --ifm-alert-background-color: rgba(247, 95, 0, 0.1);
+  --ifm-alert-border-color: var(--pd-orange);
+  --ifm-alert-foreground-color: var(--ifm-font-color-base);
+}
+
+.theme-admonition-danger {
+  --ifm-alert-background-color: rgba(229, 56, 59, 0.1);
+  --ifm-alert-border-color: var(--pd-red);
+  --ifm-alert-foreground-color: var(--ifm-font-color-base);
+}
+
+.theme-admonition-note [class*='admonitionHeading'] { color: var(--pd-purple); }
+.theme-admonition-tip [class*='admonitionHeading'] { color: var(--pd-green); }
+.theme-admonition-info [class*='admonitionHeading'] { color: var(--pd-blue); }
+.theme-admonition-warning [class*='admonitionHeading'] { color: var(--pd-orange); }
+.theme-admonition-danger [class*='admonitionHeading'] { color: var(--pd-red); }
+
+.theme-admonition [class*='admonitionIcon'] svg {
+  fill: currentColor;
+}
+
+/* ---------- Tabelas ---------- */
+.markdown table {
+  display: table;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--pd-border);
+  border-radius: var(--ifm-global-radius);
+  overflow: hidden;
+}
+
+.markdown table thead tr {
+  background: linear-gradient(90deg, rgba(247, 95, 0, 0.14), rgba(232, 54, 122, 0.1));
+}
+
+.markdown table th,
+.markdown table td {
+  border: none;
+  border-bottom: 1px solid var(--pd-border);
+}
+
+.markdown table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ---------- Tabs ---------- */
+.tabs__item--active {
+  border-bottom-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+/* ---------- Cards de categoria (DocCardList) ---------- */
+.card {
+  border: 1px solid var(--pd-border);
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+a.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 10px 24px -14px rgba(247, 95, 0, 0.6);
+}
+
+/* ---------- Paginação / TOC ---------- */
+.pagination-nav__link:hover {
+  border-color: var(--ifm-color-primary);
+}
+
+.table-of-contents__link--active {
+  font-weight: 700;
+}
+
+/* ---------- Footer ---------- */
+.footer--dark {
+  --ifm-footer-background-color: #141416;
+  --ifm-footer-link-color: #d6d6dc;
+  border-top: 3px solid var(--ifm-color-primary);
+}
+
+.footer__title {
+  color: var(--ifm-color-primary-lighter);
+}
+
+/* ---------- Utilitários de cor (para usar em MDX) ---------- */
+.text--orange { color: var(--pd-orange); }
+.text--pink { color: var(--pd-pink); }
+.text--red { color: var(--pd-red); }
+.text--purple { color: var(--pd-purple); }
+.text--green { color: var(--pd-green); }
+.text--blue { color: var(--pd-blue); }
+.text--cyan { color: var(--pd-cyan); }
+
+/* Os temas One Light/One Dark riscam/sublinham linhas de diff; as cores já bastam. */
+.language-diff .token {
+  text-decoration: none !important;
+}

@@ -1,0 +1,54 @@
+---
+title: "GitHub Actions"
+sidebar_position: 2
+description: "Automação de workflows diretamente no GitHub."
+---
+
+<TechIcon icon="githubactions/githubactions-original" alt="GitHub Actions" />
+
+<Badge color="gray">em construção</Badge>
+
+:::info[Sobre]
+Automação de workflows diretamente no GitHub.
+:::
+
+## Introdução
+
+> Espaço reservado para a introdução sobre **GitHub Actions**.
+
+## Instalação / Configuração
+
+:::note
+Documente aqui os passos de instalação e configuração. Use `<Tabs>` para separar por sistema operacional.
+:::
+
+## Comandos principais
+
+```yaml title="Exemplo: GitHub Actions"
+name: CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci && npm test
+```
+
+## Boas práticas
+
+:::tip
+Liste aqui as boas práticas recomendadas.
+:::
+
+## Exemplos práticos
+
+- [ ] Exemplo 1
+- [ ] Exemplo 2
+
+## Links úteis
+
+- [Documentação oficial](https://docs.github.com/pt/actions)

@@ -1,5 +1,5 @@
 <h1>
-    <a href="https://github.com/org-elizfab/00.dev-portal">
+    <a href="https://github.com/elizfab/portal-dev">
         <img align="center" width="40px" src="../.github/assets/images/logo.png">
     </a>
     <span>Documentação</span>
@@ -7,7 +7,7 @@
 
 ### Confira meu caderno de estudos:
 
-[![portfolio](https://img.shields.io/badge/Caderno_de_Estudos_-_portal_dev-F98855?style=for-the-badge&logo=ko-fi&logoColor=white)]()
+[![portfolio](https://img.shields.io/badge/Caderno_de_Estudos_-_portal_dev-F98855?style=for-the-badge&logo=ko-fi&logoColor=white)](https://elizfab.github.io/portal-dev/)
 
 ## Índice de Documentação
 
@@ -57,7 +57,12 @@
         <a href="./methodologies/" target="_blank">
             <img width="80px" height="80px" align="center" alt="Methodologies" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/devicon/devicon-original.svg" />
         </a>
-    </td><td></td>
+    </td><td>
+        <h3>Observabilidade</h3>
+        <a href="./observability/" target="_blank">
+            <img width="80px" height="80px" align="center" alt="Observabilidade" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/grafana/grafana-original.svg" />
+        </a>
+    </td>
     </tr>
   </tbody>
 </table>
