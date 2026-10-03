@@ -1,0 +1,38 @@
+---
+title: Migrações de banco seguras
+sidebar_position: 5
+description: Padrão expand/contract para mudar o schema sem quebrar o rollout gradual nem o rollback.
+---
+
+<Badge color="orange">dados</Badge>
+
+Durante um rollout gradual, **versão antiga e nova rodam ao mesmo tempo**. O banco precisa servir as duas,
+e o rollback não pode depender de desfazer a migração.
+
+## Expand / Contract
+
+```mermaid
+flowchart LR
+  e[1. Expand<br/>adiciona coluna nova] --> d[2. Dual write<br/>app grava nas duas]
+  d --> b[3. Backfill<br/>migra dados antigos]
+  b --> s[4. Switch read<br/>app lê da nova]
+  s --> c[5. Contract<br/>remove a antiga]
+```
+
+| Fase | Release | Compatível com rollback? |
+| --- | --- | --- |
+| Expand | Migração aditiva (nova coluna nullable) | Sim |
+| Dual write | App v2 grava nas duas colunas | Sim |
+| Backfill | Job de migração dos dados | Sim |
+| Switch read | App v3 lê da coluna nova | Sim (a antiga ainda existe) |
+| Contract | Remove a coluna antiga | **Só depois do rollout em 100%** |
+
+## Regras
+
+- Migrações **aditivas** primeiro; nada de `DROP`/`RENAME` junto com a mudança de código.
+- Nunca acople a migração destrutiva ao mesmo pacote que depende dela.
+- Migrações versionadas e idempotentes (ex.: golang-migrate, Flyway, Liquibase).
+
+:::danger
+`RENAME COLUMN` em produção com rollout gradual quebra a versão antiga na hora.
+:::

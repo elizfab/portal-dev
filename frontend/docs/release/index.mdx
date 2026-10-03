@@ -7,11 +7,12 @@ description: Gestão de releases e estratégias de rollout. Release train, pacot
 <TechIcon icon="githubactions/githubactions-original" alt="Release" />
 
 Tudo sobre **levar uma versão para produção com segurança**: as entidades do domínio, as estratégias de rollout,
-a mecânica do release train, a operação do dia a dia, a API e a arquitetura do sistema.
+a mecânica do release train, a operação do dia a dia, a API, a arquitetura e as práticas de processo.
 
 :::tip[Por onde começar]
 Novo no assunto? Leia [Glossário](./01-fundamentos/01-glossario.mdx) → [Ciclo de vida](./01-fundamentos/02-ciclo-de-vida.mdx)
-→ [Estratégias de rollout](./02-estrategias-de-rollout/index.mdx).
+→ [Estratégias de rollout](./02-estrategias-de-rollout/index.mdx). Em um incidente, vá direto ao
+[Runbook](./04-operacao/06-runbook-de-incidente.mdx).
 :::
 
 ## Sumário
@@ -135,6 +136,14 @@ Status, ações permitidas, reversões, saúde e auditoria no dia a dia do Relea
   - Histórico de status
   - Linha do tempo de ações
   - Boas práticas
+- **[Runbook de incidente no rollout](./04-operacao/06-runbook-de-incidente.mdx)**: Passo a passo para detectar, conter, comunicar e encerrar um problema durante um rollout.
+  - 1\. Detectar
+  - 2\. Conter (primeiros 5 minutos)
+  - 3\. Comunicar
+  - 4\. Corrigir
+  - 5\. Encerrar
+- **[Métricas de entrega (DORA)](./04-operacao/07-metricas-dora.mdx)**: As quatro métricas DORA, como calculá-las com os dados de releases e o que elas indicam.
+  - Referência de desempenho (State of DevOps 2021)
 
 ### [5. API](./05-api/index.mdx)
 
@@ -170,6 +179,18 @@ Especificação REST do serviço de rollout. Convenções, endpoints, modelo de 
   - Automação de status
   - Cancelamentos em cascata
   - Validações
+- **[Exemplos de uso](./05-api/05-exemplos-de-uso.mdx)**: Fluxo completo com curl. Criar pacote, agendar, consultar, pausar, reverter e registrar o resultado.
+  - 1\. Criar um agendamento
+  - 2\. Publicar um pacote (cria aplicação e release)
+  - 3\. Validar se o pacote está bloqueado
+  - 4\. Acompanhar o trem do dia
+  - 5\. Pausar e retomar o trem
+  - 6\. Rollback de uma release
+  - 7\. Registrar o resultado do rollout
+  - 8\. Bloquear uma data
+- **[Integração com CI/CD](./05-api/06-integracao-ci-cd.mdx)**: Como o pipeline publica pacotes no serviço de rollout automaticamente após o merge.
+  - Exemplo com GitHub Actions
+  - Boas práticas
 
 ### [6. Arquitetura](./06-arquitetura/index.mdx)
 
@@ -190,3 +211,33 @@ Como o sistema de rollout é construído. Backend hexagonal, eventos, micro-fron
   - Telas
   - Painel de rollout por score
   - Padrões de UI
+
+### [7. Processo e boas práticas](./07-processo/index.mdx)
+
+Práticas de engenharia em volta da release. Versionamento, branches, ambientes, hotfix, migrações, go/no-go e FAQ.
+
+- **[Versionamento e release notes](./07-processo/01-versionamento-e-release-notes.mdx)**: SemVer, Conventional Commits, tags e geração automática de changelog e notas de versão.
+  - Versionamento semântico (SemVer)
+  - Conventional Commits
+  - Tags e rastreabilidade
+  - Release notes
+- **[Estratégias de branch](./07-processo/02-estrategias-de-branch.mdx)**: Trunk-based, GitHub Flow e GitFlow, e qual combina com release train e rollout gradual.
+  - Comparativo
+  - Trunk-based + release train
+  - Regras recomendadas
+- **[Ambientes e promoção](./07-processo/03-ambientes-e-promocao.mdx)**: Caminho do pacote entre dev, homologação e produção, e os critérios de cada etapa.
+  - Princípio: build once, deploy many
+  - Critérios por ambiente
+  - Configuração
+- **[Fluxo de hotfix](./07-processo/04-hotfix.mdx)**: Como corrigir um problema urgente em produção sem quebrar o processo de release train.
+  - Primeiro: precisa mesmo de hotfix?
+  - Passo a passo
+- **[Migrações de banco seguras](./07-processo/05-migracoes-de-banco.mdx)**: Padrão expand/contract para mudar o schema sem quebrar o rollout gradual nem o rollback.
+  - Expand / Contract
+  - Regras
+- **[Checklist go/no-go](./07-processo/06-checklist-go-no-go.mdx)**: Verificações antes de iniciar e antes de avançar cada passo de um rollout.
+  - Antes de embarcar no trem
+  - Antes de avançar cada passo
+  - Critérios de no-go (parar)
+- **[FAQ e troubleshooting](./07-processo/07-faq.mdx)**: Perguntas frequentes e problemas comuns na operação de releases e trens.
+  - Perguntas frequentes

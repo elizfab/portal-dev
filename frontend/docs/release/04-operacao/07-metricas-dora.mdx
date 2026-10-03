@@ -1,0 +1,36 @@
+---
+title: Métricas de entrega (DORA)
+sidebar_position: 7
+description: As quatro métricas DORA, como calculá-las com os dados de releases e o que elas indicam.
+---
+
+<Badge color="purple">métricas</Badge>
+
+As métricas **DORA** medem desempenho de entrega de software. O sistema de releases já tem os dados
+necessários para calcular todas.
+
+| Métrica | O que mede | Como calcular aqui |
+| --- | --- | --- |
+| **Frequência de deploy** | Com que frequência se entrega em produção | Releases `FINISHED` por dia/semana |
+| **Lead time para mudanças** | Tempo do commit à produção | `finishedAt` da release menos a data do commit do pacote |
+| **Taxa de falha de mudança** | % de releases que causam problema | (`ROLLBACK_DONE` + `STEPBACK_DONE` + `ERROR`) / total |
+| **Tempo de recuperação (MTTR)** | Quanto tempo para restaurar o serviço | Do início do incidente ao `ROLLBACK_DONE`/correção |
+
+## Referência de desempenho (State of DevOps 2021)
+
+| Nível | Frequência | Lead time | Falha | Recuperação |
+| --- | --- | --- | --- | --- |
+| <Badge color="green">Elite</Badge> | Sob demanda, várias por dia | menos de 1 hora | 0–15% | menos de 1 hora |
+| <Badge color="blue">Alto</Badge> | Entre diária e semanal | 1 dia a 1 semana | 16–30% | menos de 1 dia |
+| <Badge color="orange">Médio</Badge> | Entre semanal e mensal | 1 semana a 1 mês | 16–30% | 1 dia a 1 semana |
+| <Badge color="red">Baixo</Badge> | Menos de uma vez a cada 6 meses | mais de 6 meses | 16–30% | mais de 6 meses |
+
+:::tip
+Release train com rollout gradual tende a **aumentar a frequência** e **reduzir a taxa de falha**: os lotes são
+menores e os problemas aparecem em poucos usuários.
+:::
+
+:::note
+As faixas de referência variam entre as edições do relatório State of DevOps. Use-as como orientação,
+não como meta absoluta.
+:::

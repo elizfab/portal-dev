@@ -1,0 +1,54 @@
+---
+title: Versionamento e release notes
+sidebar_position: 1
+description: SemVer, Conventional Commits, tags e geração automática de changelog e notas de versão.
+---
+
+<Badge color="blue">padrão</Badge>
+
+## Versionamento semântico (SemVer)
+
+Formato `MAJOR.MINOR.PATCH`:
+
+| Parte | Quando incrementar | Exemplo |
+| --- | --- | --- |
+| **MAJOR** | Mudança incompatível (quebra contrato) | `1.4.2` → `2.0.0` |
+| **MINOR** | Funcionalidade nova compatível | `1.4.2` → `1.5.0` |
+| **PATCH** | Correção compatível | `1.4.2` → `1.4.3` |
+
+Pré-releases e metadados: `2.0.0-rc.1`, `1.5.0-beta.2+build.45`.
+
+## Conventional Commits
+
+O tipo do commit define o próximo número de versão:
+
+| Commit | Efeito na versão |
+| --- | --- |
+| `fix: corrige cálculo do progresso` | PATCH |
+| `feat: adiciona ação de postergar` | MINOR |
+| `feat!: remove campo legado` ou rodapé `BREAKING CHANGE:` | MAJOR |
+| `docs:`, `chore:`, `test:`, `refactor:` | Sem nova versão (por padrão) |
+
+## Tags e rastreabilidade
+
+- Cada pacote liberado deve ter uma **tag git** (`v1.5.0`) apontando para o `commitSha` do pacote.
+- O pacote guarda commit, PR e story, então qualquer release é rastreável até o código.
+
+## Release notes
+
+Boas notas de versão respondem **o que mudou para quem usa**:
+
+```md title="CHANGELOG.md"
+## [1.5.0] - 2026-10-03
+### Adicionado
+- Ação de postergar release train para outra data.
+### Corrigido
+- Retomar trem restaurava status errado em releases pausadas.
+### Removido
+- Campo `gradleVersion` (sem uso).
+```
+
+:::tip
+Ferramentas como **semantic-release**, **release-please** ou **changesets** geram versão, tag e changelog
+automaticamente a partir dos commits.
+:::

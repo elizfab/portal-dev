@@ -1,0 +1,64 @@
+---
+title: FAQ e troubleshooting
+sidebar_position: 7
+description: Perguntas frequentes e problemas comuns na operação de releases e trens.
+---
+
+<Badge color="gray">ajuda</Badge>
+
+## Perguntas frequentes
+
+<details>
+  <summary>Minha release não entrou no trem. Por quê?</summary>
+
+Verifique se: o status é `WAITING`; a `releaseDate` é a data do trem; ela está vinculada ao agendamento certo;
+foi criada **antes** do horário de corte (`startAt` menos `maxPreviousSchedulingHours`); a data não tem bloqueio.
+
+</details>
+
+<details>
+  <summary>O trem foi cancelado sozinho.</summary>
+
+Acontece em três casos: não havia releases no horário de corte, um **bloqueio** foi criado para a data, ou o
+trem foi **postergado** (o original é cancelado e as releases são clonadas).
+
+</details>
+
+<details>
+  <summary>Recebi 409 ao criar uma release.</summary>
+
+Já existe release `IN_PROGRESS` ou `ROLLBACK_REQUESTED` para o mesmo pacote no mesmo agendamento.
+Conclua ou cancele a anterior.
+
+</details>
+
+<details>
+  <summary>Recebi 422 ao executar uma ação.</summary>
+
+A ação não é permitida no status atual (veja a [matriz](../04-operacao/02-acoes-da-release.mdx)), o agendamento
+de destino está inativo ou a antecedência máxima foi violada.
+
+</details>
+
+<details>
+  <summary>Fiz rollback e agora não consigo liberar o mesmo pacote.</summary>
+
+É o esperado: rollback **bloqueia** o pacote. Gere um novo pacote com a correção (novo commit).
+
+</details>
+
+<details>
+  <summary>Retomei o trem e uma release voltou para um status inesperado.</summary>
+
+O `resume` restaura o **status anterior** de cada release a partir do histórico. Confira o histórico da
+release para ver qual era o status antes da pausa.
+
+</details>
+
+<details>
+  <summary>Stepback ou rollback: qual usar?</summary>
+
+Problema restrito a um segmento → stepback. Problema geral ou grave → rollback.
+Detalhes em [Rollback x Stepback](../04-operacao/03-rollback-vs-stepback.mdx).
+
+</details>

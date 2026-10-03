@@ -1,0 +1,37 @@
+---
+title: Checklist go/no-go
+sidebar_position: 6
+description: Verificações antes de iniciar e antes de avançar cada passo de um rollout.
+---
+
+<Badge color="green">checklist</Badge>
+
+## Antes de embarcar no trem
+
+- [ ] Pacote com CI verde (build, testes, análise estática, segurança)
+- [ ] Validado em homologação, com aceite registrado
+- [ ] GMUD aprovada e vinculada à release
+- [ ] Pacote **não bloqueado** (`GET /packages-validations`)
+- [ ] Data sem [bloqueio](../03-release-train/02-bloqueios.mdx)
+- [ ] Migrações de banco compatíveis com a versão anterior
+- [ ] Feature flags configuradas (padrão desligado)
+- [ ] Plano de rollback definido (versão estável conhecida)
+- [ ] Dashboards e alertas da funcionalidade prontos
+
+## Antes de avançar cada passo
+
+- [ ] Tempo mínimo no passo cumprido
+- [ ] Volume mínimo de sessões atingido
+- [ ] Métricas de guarda saudáveis ([Saúde e controles](../04-operacao/04-saude-e-controles.mdx))
+- [ ] Sem aumento de chamados/reclamações
+- [ ] Dentro da janela operacional
+- [ ] Aprovação 4-eyes, se for segmento sensível
+
+## Critérios de no-go (parar)
+
+| Sinal | Ação |
+| --- | --- |
+| Métrica de guarda violada | Pausar; reverter se persistir |
+| Erro novo nos logs ligado à versão | Pausar e investigar |
+| Incidente aberto em dependência | Segurar o avanço |
+| Fora da janela operacional | Aguardar a próxima janela |

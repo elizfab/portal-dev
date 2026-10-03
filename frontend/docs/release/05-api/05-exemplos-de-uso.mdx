@@ -1,0 +1,104 @@
+---
+title: Exemplos de uso
+sidebar_position: 5
+description: Fluxo completo com curl. Criar pacote, agendar, consultar, pausar, reverter e registrar o resultado.
+---
+
+<Badge color="green">prático</Badge>
+
+Variáveis usadas nos exemplos:
+
+```bash
+export API=http://localhost:8080/v1
+export H_AUTH="Authorization: Bearer $TOKEN"
+export H_CORR="correlationID: $(uuidgen)"
+export H_FLOW="flowID: docs-exemplo"
+```
+
+## 1. Criar um agendamento
+
+```bash
+curl -s -X POST "$API/release-train-schedules" -H "$H_AUTH" -H "$H_CORR" -H "$H_FLOW" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "TREM_MANHA",
+    "isActive": true,
+    "startAt": "06:00",
+    "weekDays": ["MONDAY","TUESDAY","WEDNESDAY","THURSDAY"],
+    "maxPreviousSchedulingHours": 12
+  }'
+```
+
+## 2. Publicar um pacote (cria aplicação e release)
+
+```bash
+curl -s -X POST "$API/packages" -H "$H_AUTH" -H "$H_CORR" -H "$H_FLOW" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "applicationName": "meu-app",
+    "path": "apps/meu-app",
+    "commitSha": "a4f3c07d1",
+    "pullRequestUrl": "https://github.com/org/meu-app/pull/42",
+    "story": "PROJ-123",
+    "gmud": "GMUD-0001"
+  }'
+```
+
+## 3. Validar se o pacote está bloqueado
+
+```bash
+curl -s "$API/packages-validations?applicationName=meu-app&commitSha=a4f3c07d1" \
+  -H "$H_AUTH" -H "$H_CORR" -H "$H_FLOW"
+```
+
+## 4. Acompanhar o trem do dia
+
+```bash
+curl -s "$API/release-trains?page=1&limit=10" -H "$H_AUTH" -H "$H_CORR" -H "$H_FLOW" | jq '.data.items[] | {name, status}'
+curl -s "$API/release-trains/$RT_ID/releases" -H "$H_AUTH" -H "$H_CORR" -H "$H_FLOW"
+```
+
+## 5. Pausar e retomar o trem
+
+```bash
+curl -s -X PUT "$API/release-trains/$RT_ID" -H "$H_AUTH" -H "$H_CORR" -H "$H_FLOW" \
+  -H "Content-Type: application/json" \
+  -d '{ "action": "pause", "observation": "erro acima do limite" }'
+
+curl -s -X PUT "$API/release-trains/$RT_ID" -H "$H_AUTH" -H "$H_CORR" -H "$H_FLOW" \
+  -H "Content-Type: application/json" -d '{ "action": "resume" }'
+```
+
+## 6. Rollback de uma release
+
+```bash
+curl -s -X PUT "$API/releases/$RELEASE_ID" -H "$H_AUTH" -H "$H_CORR" -H "$H_FLOW" \
+  -H "Content-Type: application/json" \
+  -d '{ "action": "rollback", "observation": "crash na tela inicial" }'
+```
+
+## 7. Registrar o resultado do rollout
+
+```bash
+# sucesso
+curl -s -X PUT "$API/releases/$RELEASE_ID" -H "$H_AUTH" -H "$H_CORR" -H "$H_FLOW" \
+  -H "Content-Type: application/json" -d '{ "action": "rollout-result", "success": true }'
+
+# falha (vai para ERROR, erros gravados na observação)
+curl -s -X PUT "$API/releases/$RELEASE_ID" -H "$H_AUTH" -H "$H_CORR" -H "$H_FLOW" \
+  -H "Content-Type: application/json" \
+  -d '{ "action": "rollout-result", "success": false, "errors": ["timeout no provedor"] }'
+```
+
+## 8. Bloquear uma data
+
+```bash
+curl -s -X POST "$API/release-train-blocks" -H "$H_AUTH" -H "$H_CORR" -H "$H_FLOW" \
+  -H "Content-Type: application/json" \
+  -d '{ "date": "2026-12-25T00:00:00Z", "observation": "Natal" }'
+```
+
+:::note
+Os nomes exatos dos campos do corpo (`action`, `observation`, `errors`) seguem a especificação consolidada.
+Confira o contrato da versão da API que você está usando.
+:::
