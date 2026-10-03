@@ -1,0 +1,43 @@
+---
+title: Release
+sidebar_position: 3
+description: O que é uma release, seus campos principais, status e relação com pacotes e audiências.
+---
+
+<Badge color="orange">entidade</Badge>
+
+:::info[Definição]
+Uma **release** é a decisão de levar **um pacote** para **uma ou mais audiências** em uma data,
+de forma controlada e auditável.
+:::
+
+## Campos principais
+
+| Campo | Descrição |
+| --- | --- |
+| `packageId` | Pacote que será liberado |
+| `releaseTrainId` | Trem em que embarcou (opcional até a associação) |
+| `releaseTrainScheduleId` | Agendamento de origem |
+| `status` | Estado atual (`WAITING`, `IN_PROGRESS`, `FINISHED`…) |
+| `audiences` | Lista de audiências-alvo |
+| `progress` | Percentual do rollout (0–100) |
+| `releaseDate` / `scheduledAt` | Data da release e horário agendado |
+| `gmud` | Número da mudança aprovada |
+| `racf` | Identificador de quem originou a release |
+
+## Relacionamentos
+
+- **Pacote 1 → N releases**: o mesmo pacote pode ser liberado várias vezes (ex.: audiências diferentes).
+- **Release N ↔ N audiências**, via tabela de associação.
+- **Release N → 0..1 release train**.
+
+## Regras importantes
+
+- Não pode existir **duas releases em andamento** (`IN_PROGRESS` ou `ROLLBACK_REQUESTED`) para o mesmo
+  pacote no mesmo agendamento: a API responde **409 Conflict**.
+- Toda mudança de status grava histórico em transação. Se o histórico falhar, a operação falha.
+
+## Ver também
+
+- [Status](../04-operacao/01-status.mdx)
+- [Ações da release](../04-operacao/02-acoes-da-release.mdx)

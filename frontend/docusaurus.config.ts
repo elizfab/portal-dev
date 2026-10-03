@@ -131,6 +131,7 @@ const config: Config = {
             {label: 'Backend', to: '/docs/backend'},
             {label: 'Cloud', to: '/docs/cloud'},
             {label: 'DevOps', to: '/docs/devops'},
+            {label: 'Release & Rollout', to: '/docs/release'},
             {label: 'Containers', to: '/docs/containers'},
             {label: 'Observabilidade', to: '/docs/observability'},
             {label: 'Sistemas Operacionais', to: '/docs/operatingsystems'},
@@ -168,6 +169,7 @@ const config: Config = {
           items: [
             {label: 'Cloud', to: '/docs/cloud'},
             {label: 'DevOps', to: '/docs/devops'},
+            {label: 'Release & Rollout', to: '/docs/release'},
             {label: 'Containers', to: '/docs/containers'},
             {label: 'Observabilidade', to: '/docs/observability'},
           ],

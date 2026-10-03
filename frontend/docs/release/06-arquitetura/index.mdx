@@ -1,0 +1,20 @@
+---
+title: Arquitetura
+description: Como o sistema de rollout é construído. Backend hexagonal, eventos, micro-frontends e o portal.
+---
+
+```mermaid
+flowchart LR
+  subgraph Front[Frontend · Micro-frontends]
+    shell[Shell] --> rs[MFE Rollout]
+    shell --> sc[MFE Scheduler]
+  end
+  Front -->|REST /v1| api[API Go]
+  api --> db[(Banco)]
+  cron[Cron diário] --> fn[Função de eventos]
+  fn --> db
+  fn --> evt[Scheduler de eventos]
+  fn --> gmud[Serviço de GMUD]
+```
+
+<DocCardList />

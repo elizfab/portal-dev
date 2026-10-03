@@ -1,0 +1,63 @@
+---
+title: Status e transições
+sidebar_position: 1
+description: Status de release e de release train, estados terminais e diagrama de transições.
+---
+
+<Badge color="blue">referência</Badge>
+
+## Status da release
+
+| Status | Significado |
+| --- | --- |
+| `WAITING` | Aguardando embarque em um trem |
+| `SCHEDULED` | Associada ao trem, GMUD aberta, disparo agendado |
+| `IN_PROGRESS` | Rollout em execução |
+| `PAUSED` | Expansão pausada |
+| `STEPBACK_REQUESTED` → `STEPBACK_DONE` | Retrocesso solicitado → concluído |
+| `ROLLBACK_REQUESTED` → `ROLLBACK_DONE` | Reversão solicitada → concluída |
+| `FINISHED` | Concluída com sucesso (100%) |
+| `CANCELLED` | Cancelada |
+| `ERROR` | Falha no rollout (detalhes na observação) |
+
+## Status do release train
+
+| Status | Significado |
+| --- | --- |
+| `WAITING` | Criado, aguardando |
+| `IN_PROGRESS` | Em andamento |
+| `PAUSED` | Pausado |
+| `STEPPED_BACK` | Retrocedido |
+| `CANCELLED` | Cancelado |
+| `FINISHED` | Todas as releases terminaram |
+
+## Estados terminais
+
+`FINISHED`, `ROLLBACK_DONE`, `STEPBACK_DONE`, `CANCELLED` e `ERROR`. Quando todas as releases de um trem
+estão em um deles, o trem é finalizado automaticamente.
+
+## Diagrama
+
+```mermaid
+stateDiagram-v2
+  [*] --> WAITING
+  WAITING --> SCHEDULED: associada ao trem
+  WAITING --> CANCELLED
+  SCHEDULED --> IN_PROGRESS: deploy
+  SCHEDULED --> CANCELLED
+  IN_PROGRESS --> PAUSED: pausar
+  PAUSED --> IN_PROGRESS: retomar
+  PAUSED --> CANCELLED
+  PAUSED --> ROLLBACK_REQUESTED
+  IN_PROGRESS --> FINISHED: rollout ok
+  IN_PROGRESS --> ERROR: rollout falhou
+  FINISHED --> ROLLBACK_REQUESTED
+  FINISHED --> STEPBACK_REQUESTED
+  ROLLBACK_REQUESTED --> ROLLBACK_DONE
+  STEPBACK_REQUESTED --> STEPBACK_DONE
+```
+
+## Convenções
+
+- Valores em `UPPERCASE_WITH_UNDERSCORES`, criados por **seed** na inicialização.
+- A API retorna o **nome** do status, nunca o UUID.

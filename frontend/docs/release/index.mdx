@@ -1,0 +1,192 @@
+---
+title: Release & Rollout
+sidebar_label: Sumário
+description: Gestão de releases e estratégias de rollout. Release train, pacotes, aplicações, rollout progressivo, sob demanda, nativo e score gradual.
+---
+
+<TechIcon icon="githubactions/githubactions-original" alt="Release" />
+
+Tudo sobre **levar uma versão para produção com segurança**: as entidades do domínio, as estratégias de rollout,
+a mecânica do release train, a operação do dia a dia, a API e a arquitetura do sistema.
+
+:::tip[Por onde começar]
+Novo no assunto? Leia [Glossário](./01-fundamentos/01-glossario.mdx) → [Ciclo de vida](./01-fundamentos/02-ciclo-de-vida.mdx)
+→ [Estratégias de rollout](./02-estrategias-de-rollout/index.mdx).
+:::
+
+## Sumário
+
+### [1. Fundamentos](./01-fundamentos/index.mdx)
+
+Conceitos base de gestão de releases. Glossário, ciclo de vida e as entidades do domínio.
+
+- **[Glossário](./01-fundamentos/01-glossario.mdx)**: Termos usados em gestão de releases e rollout, do pacote ao rollback.
+  - Entidades
+  - Operação
+  - Governança
+- **[Ciclo de vida de uma release](./01-fundamentos/02-ciclo-de-vida.mdx)**: Do merge do PR à release finalizada. Etapas, responsáveis e automações.
+  - Fluxo ponta a ponta
+  - Etapas
+    - 1\. Empacotamento
+    - 2\. Criação da release
+    - 3\. Embarque no trem
+    - 4\. Agendamento e mudança
+    - 5\. Rollout
+    - 6\. Encerramento
+- **[Release](./01-fundamentos/03-release.mdx)**: O que é uma release, seus campos principais, status e relação com pacotes e audiências.
+  - Campos principais
+  - Relacionamentos
+  - Regras importantes
+- **[Release Train](./01-fundamentos/04-release-train.mdx)**: Modelo de entrega em janelas fixas. Conceito, benefícios e funcionamento do trem.
+  - Por que usar
+  - Como funciona
+  - Status do trem
+- **[Pacotes](./01-fundamentos/05-pacotes.mdx)**: Artefatos versionados de uma aplicação. Campos, bloqueio, validação e versões pai.
+  - Campos principais
+  - Bloqueio de pacote
+  - Criação automática
+  - Filtros úteis
+- **[Aplicações](./01-fundamentos/06-aplicacoes.mdx)**: Produtos e repositórios que geram pacotes. Cadastro, campos e auto-cadastro.
+  - Campos
+  - Auto-cadastro
+  - Na interface
+- **[Audiências](./01-fundamentos/07-audiencias.mdx)**: Públicos-alvo de uma release. Hierarquia, exemplos e uso no rollout.
+  - Hierarquia
+  - Padrões de nome
+  - Uso no rollout
+
+### [2. Estratégias de rollout](./02-estrategias-de-rollout/index.mdx)
+
+Formas de expor uma nova versão. Progressivo, sob demanda, nativo, score gradual e técnicas relacionadas.
+
+- **[Rollout progressivo](./02-estrategias-de-rollout/01-rollout-progressivo.mdx)**: Expansão automática em passos percentuais, guiada por tempo e métricas de saúde.
+  - Como funciona
+    - Passos
+    - Critérios de avanço
+    - Reversão automática
+  - Quando usar
+  - Cuidados
+- **[Rollout sob demanda](./02-estrategias-de-rollout/02-rollout-sob-demanda.mdx)**: Expansão manual, passo a passo, decidida pelo Release Manager.
+  - Como funciona
+  - Ações disponíveis
+  - Quando usar
+- **[Rollout nativo (lojas)](./02-estrategias-de-rollout/03-rollout-nativo.mdx)**: Liberação gradual feita pelas lojas de apps. Phased release da Apple e staged rollout do Google Play.
+  - Apple App Store: phased release
+  - Google Play: staged rollout
+  - Limitações
+  - Combinando com flags
+- **[Rollout gradual por score](./02-estrategias-de-rollout/04-score-gradual.mdx)**: Exposição por faixas de score de cliente. Régua, segmentos, passos, saúde, controles e auditoria.
+  - Régua de score
+  - Progressão por segmento
+  - Indicadores do painel
+  - Saúde e controles
+  - Histórico de ações (auditoria do ramp)
+  - Ações globais
+- **[Canary, blue-green e feature flags](./02-estrategias-de-rollout/05-canary-blue-green-feature-flags.mdx)**: Técnicas relacionadas ao rollout gradual, para backend, web e funcionalidades.
+  - Canary release
+  - Blue-green
+  - Feature flags
+  - Dark launch
+
+### [3. Release Train](./03-release-train/index.mdx)
+
+Como os trens são agendados, bloqueados, criados automaticamente e operados em lote.
+
+- **[Agendamentos](./03-release-train/01-agendamentos.mdx)**: Regras recorrentes que geram os trens. Dias, horário, vigência e antecedência.
+  - Campos
+  - Exemplo
+  - Regras
+- **[Bloqueios](./03-release-train/02-bloqueios.mdx)**: Datas em que nenhum trem roda e o cancelamento retroativo que um bloqueio dispara.
+  - Campos
+  - Cancelamento retroativo
+  - Efeito na criação diária
+- **[Fluxos automatizados](./03-release-train/03-fluxos-automatizados.mdx)**: Jobs orientados a eventos que criam trens, associam releases e disparam os rollouts.
+  - Fluxo 1: criação dos trens
+  - Fluxo 2: associação das releases
+  - Roteamento de eventos
+- **[Ações em lote](./03-release-train/04-acoes-em-lote.mdx)**: Pausar, retomar, cancelar, stepback e postergar um trem inteiro. Matriz de permissões por estado.
+  - Ações
+  - Matriz por estado da release (lote)
+  - Regras-chave
+  - Auto-finish
+
+### [4. Operação](./04-operacao/index.mdx)
+
+Status, ações permitidas, reversões, saúde e auditoria no dia a dia do Release Manager.
+
+- **[Status e transições](./04-operacao/01-status.mdx)**: Status de release e de release train, estados terminais e diagrama de transições.
+  - Status da release
+  - Status do release train
+  - Estados terminais
+  - Diagrama
+  - Convenções
+- **[Ações da release](./04-operacao/02-acoes-da-release.mdx)**: Ações individuais sobre uma release, matriz de permissões e registro do resultado do rollout.
+  - Ações
+  - Matriz por estado (individual)
+  - Resultado do rollout
+- **[Rollback x Stepback](./04-operacao/03-rollback-vs-stepback.mdx)**: Diferença entre reverter tudo e voltar um passo, e quando usar cada um.
+  - Como decidir
+- **[Saúde e controles](./04-operacao/04-saude-e-controles.mdx)**: Métricas de guarda, auto-rollback, janela operacional e observabilidade do rollout.
+  - Métricas de guarda
+  - Automação
+  - Estados de saúde
+  - Observabilidade
+- **[Histórico e auditoria](./04-operacao/05-historico-e-auditoria.mdx)**: Registro transacional de mudanças de status, linha do tempo de ações e aprovação 4-eyes.
+  - Histórico de status
+  - Linha do tempo de ações
+  - Boas práticas
+
+### [5. API](./05-api/index.mdx)
+
+Especificação REST do serviço de rollout. Convenções, endpoints, modelo de dados e regras de negócio.
+
+- **[Convenções](./05-api/01-convencoes.mdx)**: Ambientes, headers obrigatórios, paginação, datas, identificadores e códigos de erro.
+  - Ambientes
+  - Headers obrigatórios
+  - Paginação
+  - Datas e identificadores
+  - Códigos de erro
+- **[Endpoints](./05-api/02-endpoints.mdx)**: Todos os recursos e operações da API, agrupados por entidade.
+  - Applications
+  - Packages
+  - Releases
+  - Release Trains
+  - Agendamentos e bloqueios
+  - Audiences e status
+  - Health
+- **[Modelo de dados](./05-api/03-modelo-de-dados.mdx)**: Entidades, campos e relacionamentos do domínio de releases.
+  - Diagrama ER
+  - Entidades
+    - Application
+    - Package
+    - Release
+    - Release Train
+    - Release Train Schedule
+    - Release Train Block
+    - Audience
+    - Status e histórico
+- **[Regras de negócio](./05-api/04-regras-de-negocio.mdx)**: Comportamentos automáticos e validações da API, reunidos em um só lugar.
+  - Criação
+  - Automação de status
+  - Cancelamentos em cascata
+  - Validações
+
+### [6. Arquitetura](./06-arquitetura/index.mdx)
+
+Como o sistema de rollout é construído. Backend hexagonal, eventos, micro-frontends e o portal.
+
+- **[Backend hexagonal em Go](./06-arquitetura/01-backend-hexagonal.mdx)**: Camadas, portas e adapters do serviço de releases, entrada HTTP e por eventos.
+  - Camadas
+  - Portas principais
+  - Decisões
+  - Plano de desenvolvimento (fases)
+- **[Micro-frontends](./06-arquitetura/02-micro-frontends.mdx)**: Shell e MFEs remotos em Angular com Native Federation. Rotas, portas, compartilhamento e deploy.
+  - Repositórios
+  - Rotas no shell
+  - Compartilhamento
+  - Build e deploy
+  - Passo a passo de migração (monolito → MFE)
+- **[Portal de rollout](./06-arquitetura/03-portal-de-rollout.mdx)**: Telas do portal do Release Manager e os componentes de cada uma.
+  - Telas
+  - Painel de rollout por score
+  - Padrões de UI

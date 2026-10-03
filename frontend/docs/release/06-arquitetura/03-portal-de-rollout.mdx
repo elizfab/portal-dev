@@ -1,0 +1,32 @@
+---
+title: Portal de rollout
+sidebar_position: 3
+description: Telas do portal do Release Manager e os componentes de cada uma.
+---
+
+<Badge color="orange">interface</Badge>
+
+## Telas
+
+| Tela | Conteúdo | Ações |
+| --- | --- | --- |
+| **Aplicações** | Lista de aplicações e pacotes, histórico de audiências | Ver pacotes e validar bloqueio |
+| **Release Trains** | Trens do dia e suas releases, em tabela | Ações em lote: pausar, retomar, cancelar, reagendar |
+| **Detalhes da release** | Status, progresso, audiências, histórico | Pausar, retomar, cancelar, rollback, stepback |
+| **Agendamentos** | Trens recorrentes, dias, horários e bloqueios | Criar, editar, desativar |
+| **Rollout por score** | Painel do [score gradual](../02-estrategias-de-rollout/04-score-gradual.mdx) | Iniciar, avançar, pausar tudo |
+
+## Painel de rollout por score
+
+- **Cards de indicadores**: % liberado, clientes expostos, saúde da jornada, grupo de controle.
+- **Régua de score**: faixas coloridas por segmento, com o marcador "liberado até aqui".
+- **Tabela de progressão**: passo, barra de %, status, saúde, próximo passo e ações por segmento.
+- **Histórico de ações**: linha do tempo com eventos manuais e automáticos.
+- **Saúde e controles**: métricas de guarda, auto-rollback, janela operacional e hashes das versões.
+
+## Padrões de UI
+
+- Status sempre com **badge colorido** e texto (não depender só da cor).
+- Ações desabilitadas conforme a [matriz de permissões](../04-operacao/02-acoes-da-release.mdx).
+- Confirmação com **observação obrigatória** para ações destrutivas.
+- Layout responsivo (mobile first) e acessível.

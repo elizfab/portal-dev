@@ -1,0 +1,41 @@
+---
+title: Agendamentos
+sidebar_position: 1
+description: Regras recorrentes que geram os trens. Dias, horário, vigência e antecedência.
+---
+
+<Badge color="blue">configuração</Badge>
+
+## Campos
+
+| Campo | Descrição |
+| --- | --- |
+| `name` | Nome do agendamento (vira prefixo do trem: `NOME_AAAAMMDD`) |
+| `isActive` | Ativo ou não |
+| `startAt` | Horário de execução (`HH:mm`), ex.: `06:00` ou `13:00` |
+| `weekDays` | Dias da semana (`MONDAY`…`SUNDAY`) |
+| `startDate` / `endDate` | Vigência (opcional) |
+| `maxPreviousSchedulingHours` | Antecedência máxima, em horas, para agendar uma release nesse trem |
+
+## Exemplo
+
+```json title="POST /v1/release-train-schedules"
+{
+  "name": "TREM_MANHA",
+  "isActive": true,
+  "startAt": "06:00",
+  "weekDays": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY"],
+  "maxPreviousSchedulingHours": 12
+}
+```
+
+## Regras
+
+- `GET /release-train-schedules?only_valid=true` lista apenas os agendamentos vigentes.
+- O horário de corte do trem é o `startAt` menos `maxPreviousSchedulingHours`.
+- **Desativar ou excluir** um agendamento **cancela** todas as releases vinculadas a ele, com histórico.
+- A postergação de uma release valida se o agendamento de destino está ativo e respeita a antecedência.
+
+:::warning
+Desativar um agendamento tem efeito colateral imediato nas releases já planejadas. Confira antes.
+:::

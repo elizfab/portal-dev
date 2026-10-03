@@ -1,0 +1,43 @@
+---
+title: Rollout sob demanda
+sidebar_position: 2
+description: Expansão manual, passo a passo, decidida pelo Release Manager.
+---
+
+<Badge color="orange">manual</Badge>
+
+:::info[Definição]
+No **rollout sob demanda** cada avanço é uma **ação explícita** de uma pessoa, normalmente o Release Manager,
+depois de validar métricas e sinais de negócio.
+:::
+
+## Como funciona
+
+1. A release entra em `IN_PROGRESS` no primeiro passo (ou só para colaboradores).
+2. O sistema **sugere** o próximo passo e horário, mas não avança sozinho.
+3. O Release Manager escolhe **Avançar**, **Pausar**, **Stepback** ou **Rollback**.
+4. Cada ação vai para o histórico com autor, horário e observação.
+
+## Ações disponíveis
+
+| Ação | Efeito |
+| --- | --- |
+| **Iniciar** | Começa a expansão do segmento/passo |
+| **Avançar** | Vai para o próximo percentual |
+| **Pausar** | Congela no ponto atual |
+| **Retomar** | Continua de onde parou (restaura o status anterior) |
+| **Stepback** | Volta ao passo/audiência anterior |
+| **Rollback** | Reverte tudo para a versão estável |
+
+As ações permitidas dependem do status. Veja a [matriz de ações](../04-operacao/02-acoes-da-release.mdx).
+
+## Quando usar
+
+- Mudanças **regulatórias**, financeiras ou com impacto alto.
+- Quando o critério de sucesso é de **negócio** (conversão, chamados) e não só técnico.
+- Primeiros rollouts de um produto, antes de confiar na automação.
+
+:::tip
+Um meio-termo comum é o **semi-automático**: a automação pausa ao fim de cada passo e espera a aprovação
+de uma pessoa, com aprovação **4-eyes** nos passos críticos.
+:::

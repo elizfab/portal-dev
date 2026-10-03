@@ -1,0 +1,41 @@
+---
+title: Rollout nativo (lojas)
+sidebar_position: 3
+description: Liberação gradual feita pelas lojas de apps. Phased release da Apple e staged rollout do Google Play.
+---
+
+<Badge color="purple">mobile</Badge>
+
+:::info[Definição]
+**Rollout nativo** é a liberação gradual oferecida pelas próprias **lojas de aplicativos**. A loja controla
+qual percentual de usuários recebe a atualização do binário.
+:::
+
+## Apple App Store: phased release
+
+- Liberação automática em **7 dias**: 1% → 2% → 5% → 10% → 20% → 50% → 100%.
+- Vale para usuários com **atualização automática**. Quem busca a versão manualmente na loja recebe na hora.
+- Pode ser **pausada** (até 30 dias no total) ou **liberada para todos** a qualquer momento.
+
+## Google Play: staged rollout
+
+- O percentual é definido **manualmente** no Play Console (ex.: 5%, 20%, 50%, 100%).
+- Pode ser **interrompido** (halt) se houver problema.
+- É possível segmentar por **país** e acompanhar crashes e ANRs no Android Vitals.
+
+## Limitações
+
+| Limitação | Consequência |
+| --- | --- |
+| Não há rollback de binário | Corrigir exige **nova versão** (hotfix) e nova revisão da loja |
+| Granularidade da loja | Não segmenta por perfil de cliente, só por percentual/país |
+| Tempo de revisão | A loja pode atrasar a liberação |
+
+## Combinando com flags
+
+O padrão recomendado é **desacoplar deploy de release**:
+
+1. o binário sai pelo rollout nativo com a funcionalidade **desligada**;
+2. a funcionalidade é ligada depois via feature flag, com [score gradual](./04-score-gradual.mdx) ou
+   [rollout progressivo](./01-rollout-progressivo.mdx);
+3. se der problema, basta **desligar a flag**, sem esperar uma nova versão na loja.

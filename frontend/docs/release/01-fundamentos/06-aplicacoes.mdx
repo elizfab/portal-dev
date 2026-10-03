@@ -1,0 +1,34 @@
+---
+title: Aplicações
+sidebar_position: 6
+description: Produtos e repositórios que geram pacotes. Cadastro, campos e auto-cadastro.
+---
+
+<Badge color="orange">entidade</Badge>
+
+:::info[Definição]
+A **aplicação** representa o produto (app, microfrontend, serviço) que gera pacotes. É a raiz da hierarquia
+**aplicação → pacotes → releases**.
+:::
+
+## Campos
+
+| Campo | Descrição |
+| --- | --- |
+| `repositoryName` | Nome do repositório |
+| `repositoryUrl` | URL do repositório |
+| `journeyName` | Jornada/produto ao qual pertence (opcional) |
+| `path` | Caminho da aplicação (útil em monorepos) |
+| `isActive` | Se a aplicação está ativa |
+
+## Auto-cadastro
+
+Não é preciso cadastrar a aplicação antes do primeiro deploy. Ao criar um pacote:
+
+- se o nome já existe, o pacote é vinculado à aplicação existente;
+- senão, a aplicação é criada com o nome informado, o domínio extraído da URL do PR e o `path` enviado.
+
+## Na interface
+
+A tela de **Aplicações** lista as aplicações cadastradas. Ao abrir uma delas aparecem os pacotes e o histórico
+de releases e audiências de cada versão.

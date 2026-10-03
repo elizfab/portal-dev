@@ -1,0 +1,41 @@
+---
+title: Ações em lote
+sidebar_position: 4
+description: Pausar, retomar, cancelar, stepback e postergar um trem inteiro. Matriz de permissões por estado.
+---
+
+<Badge color="orange">operação</Badge>
+
+As ações em lote são executadas na tela do **Release Train** e afetam **todas as releases** do trem
+(`PUT /release-trains/{id}` ou `PUT /release-trains/batch-actions`).
+
+## Ações
+
+| Ação | Trem vai para | Releases vão para | Detalhe |
+| --- | --- | --- | --- |
+| `pause` | `PAUSED` | `PAUSED` | Observação padrão "pausa DD/MM/AAAA" |
+| `resume` | `IN_PROGRESS` | **status anterior** de cada release | Restaurado a partir do histórico |
+| `cancel` | `CANCELLED` | `CANCELLED` | Observação padrão "cancel DD/MM/AAAA" |
+| `stepback` | `STEPPED_BACK` | `STEPBACK_REQUESTED` | Retrocede todas |
+| `postpone` | `CANCELLED` | atuais `CANCELLED` + **clones** `WAITING` na nova data | Pode trocar o agendamento dos clones |
+
+## Matriz por estado da release (lote)
+
+| Estado | Pausar | Retomar | Cancelar | Reagendar |
+| --- | :---: | :---: | :---: | :---: |
+| Agendado | Não | Não | **Sim** | **Sim** |
+| Expansão pausada | (já pausado) | **Sim** | **Sim** | **Sim** |
+| Em progresso | **Sim** | Não | Não | Não |
+| Expansão concluída | Não | Não | Não | Não |
+| Stepback / Rollback / Cancelado | Não | Não | Não | Não |
+
+## Regras-chave
+
+- **Reagendar** só existe em lote.
+- **Rollback** e **stepback individuais** não existem em lote. Ficam na tela da release.
+- **Expansão concluída** é terminal para o lote, mas permite rollback/stepback individualmente.
+
+## Auto-finish
+
+Sempre que uma release chega a um status terminal, o sistema verifica o trem: se **todas** as releases são
+terminais, o trem vai para `FINISHED` e grava histórico.

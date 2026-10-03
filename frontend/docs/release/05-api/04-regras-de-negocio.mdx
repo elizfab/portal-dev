@@ -1,0 +1,38 @@
+---
+title: Regras de negócio
+sidebar_position: 4
+description: Comportamentos automáticos e validações da API, reunidos em um só lugar.
+---
+
+<Badge color="red">regras</Badge>
+
+## Criação
+
+| Regra | Comportamento |
+| --- | --- |
+| Auto-cadastro de aplicação | `POST /packages` cria a aplicação se o nome não existir |
+| Release automática | `POST /packages` cria uma release `WAITING` com a GMUD informada |
+| Duplicidade | Release `IN_PROGRESS`/`ROLLBACK_REQUESTED` para o mesmo pacote e agendamento → **409** |
+
+## Automação de status
+
+| Regra | Comportamento |
+| --- | --- |
+| Histórico | Toda mudança real de status grava histórico em transação |
+| Auto-finish | Trem vai para `FINISHED` quando todas as releases são terminais |
+| Trem vazio | Sem releases no corte → trem `CANCELLED` |
+| Rollback | Bloqueia o pacote atual |
+
+## Cancelamentos em cascata
+
+| Gatilho | Efeito |
+| --- | --- |
+| Criar bloqueio | Cancela trens e releases da data (trens primeiro) |
+| Desativar/excluir agendamento | Cancela as releases vinculadas |
+| Postergar trem | Clona releases para a nova data e cancela as atuais e o trem |
+
+## Validações
+
+- Postergação valida **agendamento ativo** e **antecedência máxima** (`maxPreviousSchedulingHours`).
+- `rollout-result` com sucesso fora dos status esperados → **422**.
+- Todos os status seguem `UPPERCASE_WITH_UNDERSCORES` e são criados por seed.

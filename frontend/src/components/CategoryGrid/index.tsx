@@ -43,6 +43,13 @@ const categories: Category[] = [
     color: 'var(--pd-blue)',
   },
   {
+    title: 'Release & Rollout',
+    description: 'Release train, pacotes e rollout progressivo, sob demanda, nativo e por score.',
+    to: '/docs/release',
+    icon: 'argocd/argocd-original',
+    color: 'var(--pd-orange)',
+  },
+  {
     title: 'Containers',
     description: 'Docker e Kubernetes, do básico à orquestração.',
     to: '/docs/containers',

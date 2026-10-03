@@ -1,0 +1,35 @@
+---
+title: Bloqueios
+sidebar_position: 2
+description: Datas em que nenhum trem roda e o cancelamento retroativo que um bloqueio dispara.
+---
+
+<Badge color="red">congelamento</Badge>
+
+Um **bloqueio** (block) marca uma data em que **não pode haver mudanças**: feriados, datas comerciais
+críticas ou congelamentos de fim de ano.
+
+## Campos
+
+| Campo | Descrição |
+| --- | --- |
+| `date` | Data bloqueada |
+| `observation` | Motivo (ex.: "Black Friday") |
+
+## Cancelamento retroativo
+
+Ao criar um bloqueio para uma data que já tem trens e releases:
+
+1. o bloqueio é salvo;
+2. os **trens** que iniciam naquela data e não estão cancelados vão para `CANCELLED`;
+3. as **releases** daquela data e não canceladas vão para `CANCELLED`;
+4. cada cancelamento grava histórico com a observação do bloqueio.
+
+:::danger
+A ordem é sempre **trens antes de releases**. Se o cancelamento dos trens falhar, as releases não são
+processadas e a requisição retorna erro, **mas o bloqueio continua salvo**.
+:::
+
+## Efeito na criação diária
+
+O job diário verifica se existe bloqueio para a data. Se existir, registra o motivo e **não cria trens**.

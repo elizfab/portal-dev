@@ -1,0 +1,55 @@
+---
+title: Backend hexagonal em Go
+sidebar_position: 1
+description: Camadas, portas e adapters do serviço de releases, entrada HTTP e por eventos.
+---
+
+<TechIcon icon="go/go-original-wordmark" alt="Go" size={56} />
+
+## Camadas
+
+```text
+cmd/                     # entrypoints: API HTTP e função de eventos
+internal/
+├── domain/              # entidades, tipos e regras puras
+├── usecase/             # casos de uso (criação de trens, associação, ações)
+├── ports/
+│   ├── in/              # interfaces de serviço (o que o sistema oferece)
+│   └── out/             # interfaces de repositório e integrações
+└── adapters/
+    ├── in/http          # handlers REST
+    ├── in/event         # roteador de eventos (cron / associação)
+    └── out/             # banco, scheduler de eventos, GMUD
+```
+
+## Portas principais
+
+| Porta | Tipo | Responsabilidade |
+| --- | --- | --- |
+| `ReleaseTrainCreationService` | in | Criar os trens do dia |
+| `ReleaseAssociationService` | in | Associar releases ao trem |
+| `ReleaseTrainBlockRepository.FindByDate` | out | Verificar bloqueio |
+| `ReleaseTrainSchedulerRepository.FindActiveByDate` | out | Agendamentos vigentes |
+| `ReleaseRepository.FindByStatusAndSchedule` | out | Releases elegíveis |
+| `EventPublisher.CreateScheduleRule` | out | Criar disparo único e devolver o ARN |
+| `GmudService.CreateGmud` | out | Abrir a mudança (stub enquanto o serviço externo não existe) |
+
+## Decisões
+
+- **UUID v7** gerado nas factories de domínio.
+- Banco relacional (PostgreSQL) para FKs e UUID nativo. O template inicial usa MongoDB.
+- Deploy em container (Docker multi-stage) e funções orientadas a eventos para os jobs.
+- Testes por camada: domínio e casos de uso com mocks das portas.
+
+## Plano de desenvolvimento (fases)
+
+1. Stack e estrutura base
+2. Migrations
+3. Docker
+4. Domínio
+5. Casos de uso
+6. Adapters de saída
+7. Adapters de entrada (HTTP e eventos)
+8. Entrypoints
+9. Documentação técnica
+10. Testes

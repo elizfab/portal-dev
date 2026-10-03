@@ -1,0 +1,44 @@
+---
+title: Ações da release
+sidebar_position: 2
+description: Ações individuais sobre uma release, matriz de permissões e registro do resultado do rollout.
+---
+
+<Badge color="orange">operação</Badge>
+
+As ações individuais ficam na tela de **detalhes da release** (`PUT /releases/{id}`).
+
+## Ações
+
+| Ação | Resultado | Observação |
+| --- | --- | --- |
+| `deploy` | `IN_PROGRESS` | Início do rollout |
+| `pause` | `PAUSED` | Com observação |
+| `stepback` | `STEPBACK_REQUESTED` | Volta à audiência/passo anterior |
+| `rollback` | `ROLLBACK_REQUESTED` | **Bloqueia o pacote atual** e valida o pacote alvo |
+| `postpone` | nova data/agendamento | Valida agendamento ativo e antecedência máxima |
+| `rollout-result` | `FINISHED` / `*_DONE` / `ERROR` | Registra o resultado (veja abaixo) |
+
+## Matriz por estado (individual)
+
+| Estado | Pausar | Retomar | Cancelar | Rollback | Stepback |
+| --- | :---: | :---: | :---: | :---: | :---: |
+| Agendado | Não | Não | **Sim** | Não | Não |
+| Expansão pausada | (já pausado) | **Sim** | **Sim** | **Sim** | Não |
+| Em progresso | **Sim** | Não | Não | Não | Não |
+| Expansão concluída | Não | Não | Não | **Sim** | **Sim** |
+| Stepback / Cancelado / Rollback | Não | Não | Não | Não | Não |
+
+## Resultado do rollout
+
+```json title="PUT /v1/releases/{id}"
+{ "action": "rollout-result", "success": true }
+```
+
+| `success` | Status atual | Vai para |
+| --- | --- | --- |
+| `true` | em execução | `FINISHED` (progress 100) |
+| `true` | `STEPBACK_REQUESTED` | `STEPBACK_DONE` (progress 100) |
+| `true` | `ROLLBACK_REQUESTED` | `ROLLBACK_DONE` (progress 100) |
+| `true` | outros | **422** |
+| `false` | qualquer | `ERROR`, com os erros gravados na observação |

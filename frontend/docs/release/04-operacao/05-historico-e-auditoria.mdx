@@ -1,0 +1,39 @@
+---
+title: Histórico e auditoria
+sidebar_position: 5
+description: Registro transacional de mudanças de status, linha do tempo de ações e aprovação 4-eyes.
+---
+
+<Badge color="purple">governança</Badge>
+
+## Histórico de status
+
+Toda mudança de status de uma **release** ou de um **trem** grava um registro com:
+
+- a entidade e o **novo status**;
+- a **observação** (motivo);
+- o **momento** da alteração.
+
+Regras:
+
+- só grava quando o status **realmente muda**;
+- é **transacional**: se o histórico falhar, a mudança também falha;
+- o `resume` usa o histórico para **restaurar o status anterior** de cada release.
+
+## Linha do tempo de ações
+
+O painel do rollout mostra os eventos em ordem, indicando se foram **manuais** (com autor) ou **automáticos**
+(regra de progressão):
+
+```text
+08:00  Rollout iniciado: feature ativada        manual · aprovação 4-eyes
+09:30  Colaboradores concluído (100%)           automático
+10:00  Varejo concluído (100%)                  automático · regra de progressão
+11:00  Massa avançado 25% → 30%                 manual · operador
+```
+
+## Boas práticas
+
+- Exigir **observação** em pausas, cancelamentos e reversões.
+- Aprovação **4-eyes** para iniciar rollouts e para passos em segmentos sensíveis.
+- Vincular cada release à sua **GMUD**.

@@ -1,0 +1,39 @@
+---
+title: Release Train
+sidebar_position: 4
+description: Modelo de entrega em janelas fixas. Conceito, benefícios e funcionamento do trem.
+---
+
+<Badge color="orange">conceito</Badge>
+
+:::info[Definição]
+**Release train** é um modelo de entrega em que mudanças "embarcam" em **janelas fixas e previsíveis**.
+Quem perder o trem espera o próximo, e o trem não espera ninguém.
+:::
+
+## Por que usar
+
+| Benefício | Como aparece no dia a dia |
+| --- | --- |
+| **Previsibilidade** | Times sabem exatamente quando sua versão sai (ex.: 06:00 e 13:00). |
+| **Menos risco por mudança** | Lotes menores e frequentes, com rollout gradual. |
+| **Governança** | Uma GMUD por release, histórico centralizado, ações em lote. |
+| **Operação concentrada** | O Release Manager acompanha todas as releases do dia em uma única tela. |
+
+## Como funciona
+
+1. Um [agendamento](../03-release-train/01-agendamentos.mdx) define dias e horário.
+2. Diariamente o sistema cria o trem `NOME_AAAAMMDD` com status `WAITING`, exceto em [dias bloqueados](../03-release-train/02-bloqueios.mdx).
+3. No horário de corte, as releases `WAITING` do dia são **associadas** ao trem.
+4. Sem releases, o trem é **cancelado** automaticamente.
+5. O trem pode ser pausado, retomado, cancelado, retrocedido ou postergado **em lote**.
+6. Quando todas as releases terminam, o trem vai para `FINISHED`.
+
+## Status do trem
+
+`WAITING` → `IN_PROGRESS` → `FINISHED`, com os desvios `PAUSED`, `CANCELLED` e `STEPPED_BACK`.
+Detalhes em [Status](../04-operacao/01-status.mdx).
+
+## Ver também
+
+- [Seção Release Train](../03-release-train/index.mdx)

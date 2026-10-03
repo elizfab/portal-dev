@@ -1,0 +1,55 @@
+---
+title: Convenções
+sidebar_position: 1
+description: Ambientes, headers obrigatórios, paginação, datas, identificadores e códigos de erro.
+---
+
+<Badge color="blue">padrões</Badge>
+
+## Ambientes
+
+| Ambiente | Base URL |
+| --- | --- |
+| local | `http://localhost:8080/v1` |
+| dev / hom / prod | `https://<host-do-ambiente>/v1` |
+
+## Headers obrigatórios
+
+| Header | Descrição |
+| --- | --- |
+| `Authorization` | `Bearer {token}` (JWT) |
+| `correlationID` | UUID para rastrear a requisição ponta a ponta |
+| `flowID` | Identificador do fluxo de origem |
+
+## Paginação
+
+```json
+{
+  "data": {
+    "items": [],
+    "pagination": { "page": 1, "total": 100, "limit": 10 }
+  }
+}
+```
+
+| Query | Padrão | Observação |
+| --- | --- | --- |
+| `page` | 1 | Página atual |
+| `limit` | 10 | Máximo 100 |
+| `pageSize` | (n/a) | Alias de `limit` |
+
+## Datas e identificadores
+
+- Datas em **ISO 8601 UTC** (`2026-01-01T12:00:00Z`). `releaseDate` usa `YYYY-MM-DD`.
+- IDs são **UUID v7**: ordenáveis pelo tempo de criação.
+- `createdAt` é gerado pelo banco e imutável. `updatedAt` fica nulo até a primeira atualização real.
+
+## Códigos de erro
+
+| Código | Quando |
+| --- | --- |
+| **400** | Payload inválido |
+| **404** | Recurso não encontrado |
+| **409** | Duplicado ou release já em andamento |
+| **422** | Regra de negócio (bloqueio, agendamento inativo, transição inválida) |
+| **500** | Erro inesperado |

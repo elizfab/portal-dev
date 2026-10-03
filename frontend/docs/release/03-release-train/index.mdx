@@ -1,0 +1,18 @@
+---
+title: Release Train na prática
+description: Como os trens são agendados, bloqueados, criados automaticamente e operados em lote.
+---
+
+O conceito está em [Fundamentos → Release Train](../01-fundamentos/04-release-train.mdx). Esta seção detalha a
+**mecânica**: de onde os trens vêm, quando não rodam e como são operados.
+
+```mermaid
+flowchart LR
+  sch[Agendamento] -->|cron diário| create[Cria trem do dia]
+  blk[Bloqueio] -. impede .-> create
+  create -->|horário de corte| assoc[Associa releases WAITING]
+  assoc --> ops[Operação em lote]
+  ops --> fin[Auto-finish]
+```
+
+<DocCardList />

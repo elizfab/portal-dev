@@ -1,0 +1,39 @@
+---
+title: Saúde e controles
+sidebar_position: 4
+description: Métricas de guarda, auto-rollback, janela operacional e observabilidade do rollout.
+---
+
+<Badge color="green">observabilidade</Badge>
+
+## Métricas de guarda
+
+São os limites que definem se o rollout pode continuar.
+
+| Métrica | Limite exemplo | Por quê |
+| --- | --- | --- |
+| Taxa de erro (JS/API) | menor que 0,5% | Erro funcional |
+| Crash (app/webview) | menor que 0,2% | Estabilidade |
+| Latência da tela | menor que 2,0 s | Experiência |
+| Volume mínimo | 50 mil sessões por passo | Significância |
+
+## Automação
+
+- **Auto-pause / auto-rollback**: se uma métrica ultrapassar o limite por um período (ex.: 10 min), a expansão
+  é pausada ou revertida automaticamente.
+- **Janela operacional**: avanços só acontecem dentro do horário com equipe disponível (ex.: 08:00–18:30).
+- **Grupo de controle (holdout)**: uma fração mantida na versão anterior permite comparar a nova contra a estável.
+
+## Estados de saúde
+
+| Estado | Critério | Ação sugerida |
+| --- | --- | --- |
+| <Badge color="green">Saudável</Badge> | Todas as métricas dentro do limite | Avançar |
+| <Badge color="orange">Atenção</Badge> | Métrica próxima do limite | Segurar o passo |
+| <Badge color="red">Crítico</Badge> | Limite violado | Pausar / reverter |
+
+## Observabilidade
+
+- Cada release deve ter um atalho para o **dashboard** de métricas (ex.: Datadog, Grafana).
+- Logs e eventos do frontend devem usar um **logger centralizado** e **nunca** registrar dados pessoais (PII).
+- Use `correlationID` e `flowID` em todas as chamadas para rastrear ponta a ponta.

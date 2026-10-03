@@ -1,0 +1,44 @@
+---
+title: Glossário
+sidebar_position: 1
+description: Termos usados em gestão de releases e rollout, do pacote ao rollback.
+---
+
+<Badge color="blue">referência</Badge>
+
+## Entidades
+
+| Termo | Definição |
+| --- | --- |
+| **Aplicação** (Application) | Repositório/produto que gera versões. Ex.: um app mobile ou um microfrontend. |
+| **Pacote** (Package) | Artefato versionado de uma aplicação, identificado por commit (`commitSha`), PR e story. |
+| **Release** | A intenção de levar **um pacote** para **uma ou mais audiências** em uma data. Tem status, progresso e histórico. |
+| **Release Train** | Agrupamento de releases que "embarcam" juntas em uma janela fixa (ex.: trem das 06:00). |
+| **Agendamento** (Schedule) | Regra recorrente que gera os trens: dias da semana, horário e vigência. |
+| **Bloqueio** (Block) | Data em que nenhum trem roda (feriado, congelamento de mudanças). |
+| **Audiência** (Audience) | Público-alvo de uma release (plataforma, segmento, colaboradores…), com hierarquia via `parentId`. |
+
+## Operação
+
+| Termo | Definição |
+| --- | --- |
+| **Rollout** | Exposição gradual de uma nova versão ao público. |
+| **Expansão** | Avanço do rollout para um percentual ou segmento maior. |
+| **Passo** (step) | Cada degrau da expansão (ex.: 1% → 5% → 25% → 100%). |
+| **Rollback** | Reversão **total** para o pacote estável anterior. O pacote atual fica bloqueado. |
+| **Stepback** | Reversão **parcial**: volta a release para a audiência/passo anterior. |
+| **Pausa** | Congela a expansão no ponto atual, sem reverter. |
+| **Postergação** (postpone) | Move releases para uma data/trem futuro. |
+| **Status terminal** | Estado sem saída: `FINISHED`, `ROLLBACK_DONE`, `STEPBACK_DONE`, `CANCELLED`, `ERROR`. |
+
+## Governança
+
+| Termo | Definição |
+| --- | --- |
+| **GMUD** | Gestão de Mudança: registro formal (ITIL) que autoriza a mudança em produção. |
+| **Release Manager** (RM) | Pessoa responsável por acompanhar e operar os trens e releases. |
+| **4-eyes** | Aprovação por duas pessoas antes de iniciar ou avançar um rollout. |
+| **Janela operacional** | Horário em que expansões são permitidas (ex.: 08:00–18:30). |
+| **Holdout** / grupo de controle | Fatia do público mantida na versão antiga para comparação. |
+| **Métrica de guarda** | Indicador que bloqueia o avanço ou dispara rollback (taxa de erro, crash, latência). |
+| **Score** | Nota atribuída ao cliente que define **quando** ele recebe a novidade no [score gradual](../02-estrategias-de-rollout/04-score-gradual.mdx). |

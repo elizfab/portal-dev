@@ -1,0 +1,24 @@
+---
+title: Estratégias de rollout
+description: Formas de expor uma nova versão. Progressivo, sob demanda, nativo, score gradual e técnicas relacionadas.
+---
+
+Rollout é **como** uma versão chega ao público depois de liberada. A estratégia define **quem** recebe primeiro,
+**quanto** recebe a cada passo e **quem decide** o avanço: uma regra automática ou uma pessoa.
+
+## Comparativo
+
+| Estratégia | Quem decide o avanço | Unidade de expansão | Reversão | Melhor para |
+| --- | --- | --- | --- | --- |
+| [Progressivo](./01-rollout-progressivo.mdx) | Regra automática (tempo + métricas) | % do público | Automática ou manual | Mudanças frequentes com boa observabilidade |
+| [Sob demanda](./02-rollout-sob-demanda.mdx) | Pessoa (Release Manager) | Passo manual | Manual | Mudanças sensíveis ou com validação de negócio |
+| [Nativo](./03-rollout-nativo.mdx) | Loja (App Store / Google Play) | % definido pela loja | Pausar na loja; nova versão para corrigir | Binários de apps mobile |
+| [Score gradual](./04-score-gradual.mdx) | Regra + pessoa, por segmento | Faixa de score | Stepback por segmento ou rollback | Bases grandes e segmentadas de clientes |
+| [Canary, blue-green e flags](./05-canary-blue-green-feature-flags.mdx) | Varia | Instância, ambiente ou flag | Troca de tráfego / desligar flag | Backend, web e features isoladas |
+
+:::tip[Combinando estratégias]
+As estratégias se complementam. Um app pode usar o **rollout nativo** para o binário e o **score gradual**
+(via feature flag) para ligar a funcionalidade nova aos poucos.
+:::
+
+<DocCardList />

@@ -1,0 +1,78 @@
+---
+title: Endpoints
+sidebar_position: 2
+description: Todos os recursos e operações da API, agrupados por entidade.
+---
+
+<Badge color="orange">referência</Badge>
+
+## Applications
+
+| Método | Rota | Descrição |
+| --- | --- | --- |
+| POST | `/applications` | Criar |
+| GET | `/applications` | Listar |
+| GET | `/applications/{id}` | Buscar |
+| GET | `/applications/{id}/packages` | Pacotes da aplicação |
+| DELETE | `/applications/{id}` | Excluir |
+
+## Packages
+
+| Método | Rota | Descrição |
+| --- | --- | --- |
+| POST | `/packages` | Criar (cria aplicação e release automaticamente) |
+| GET | `/packages` | Listar com filtros combináveis |
+| GET | `/packages/{id}` | Buscar |
+| GET | `/packages/{id}/releases/audiences` | Audiências do histórico de releases |
+| GET | `/packages-validations` | Validar se está bloqueado |
+| PATCH | `/packages/{id}` | Atualizar |
+| DELETE | `/packages/{id}` | Excluir (soft delete) |
+
+## Releases
+
+| Método | Rota | Descrição |
+| --- | --- | --- |
+| POST | `/releases` | Criar |
+| GET | `/releases` | Listar (`?releaseTrainId=`) |
+| GET | `/releases/{id}` | Buscar |
+| PATCH | `/releases/{id}` | Atualizar dados |
+| PUT | `/releases/{id}` | **Executar ação** ([ações](../04-operacao/02-acoes-da-release.mdx)) |
+| DELETE | `/releases/{id}` | Excluir |
+
+## Release Trains
+
+| Método | Rota | Descrição |
+| --- | --- | --- |
+| POST | `/release-trains` | Criar |
+| GET | `/release-trains` | Listar |
+| GET | `/release-trains/{id}` | Buscar |
+| GET | `/release-trains/{id}/releases` | Releases do trem |
+| PATCH | `/release-trains/{id}` | Atualizar |
+| PUT | `/release-trains/{id}` | **Ação no trem** ([ações em lote](../03-release-train/04-acoes-em-lote.mdx)) |
+| PUT | `/release-trains/batch-actions` | Ação em vários trens |
+| DELETE | `/release-trains/{id}` | Excluir |
+
+## Agendamentos e bloqueios
+
+| Método | Rota | Descrição |
+| --- | --- | --- |
+| POST / GET | `/release-train-schedules` | Criar / listar (`?only_valid=true`) |
+| GET / PATCH / DELETE | `/release-train-schedules/{id}` | Buscar / atualizar / excluir |
+| POST / GET | `/release-train-blocks` | Criar (cancela retroativamente) / listar |
+| GET / DELETE | `/release-train-blocks/{id}` | Buscar / excluir |
+
+## Audiences e status
+
+| Método | Rota | Descrição |
+| --- | --- | --- |
+| POST / GET | `/audiences` | Criar / listar |
+| GET / DELETE | `/audiences/{id}` | Buscar / excluir |
+| GET | `/audiences/by-parent/{parentId}` | Filhos de uma audiência |
+| POST / GET | `/release-statuses` | Status de release |
+| POST / GET | `/release-train-statuses` | Status de trem |
+
+## Health
+
+| Método | Rota | Descrição |
+| --- | --- | --- |
+| GET | `/checks` | Health check |

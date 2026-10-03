@@ -1,0 +1,57 @@
+---
+title: Micro-frontends
+sidebar_position: 2
+description: Shell e MFEs remotos em Angular com Native Federation. Rotas, portas, compartilhamento e deploy.
+---
+
+<TechIcon icon="angularjs/angularjs-original" alt="Angular" size={56} />
+
+O frontend é dividido em **três aplicações independentes**, cada uma com repositório, build e deploy próprios,
+integradas **em tempo de execução**.
+
+## Repositórios
+
+| Projeto | Responsabilidade | Porta dev | Rotas |
+| --- | --- | --- | --- |
+| `release-control-shell` | Layout, autenticação, orquestração | 6000 | `/`, `/auth` |
+| `rollout-service` | Aplicações e Release Trains | 6001 | `/applications`, `/release-trains` |
+| `release-train-scheduler` | Agendamentos | 6002 | `/release-train-schedulers` |
+| backend | API única | 8083 | `/v1` |
+
+## Rotas no shell
+
+```ts title="app.routes.ts (shell)"
+{
+  path: 'release-trains',
+  loadChildren: () =>
+    loadRemoteModule({
+      remoteEntry: 'http://localhost:6001/remoteEntry.json',
+      exposedModule: './ReleaseTrainsRoutes',
+    }).then((m) => m.RELEASE_TRAINS_ROUTES),
+}
+```
+
+- O **shell** define a navegação e carrega o módulo remoto sob demanda.
+- Cada **MFE** expõe suas `Routes` em `federation.config.js`.
+- Rotas protegidas por `authGuard` no shell.
+
+## Compartilhamento
+
+- Dependências Angular compartilhadas como **singleton** para não duplicar o framework.
+- Tipos de domínio (enums de status, audiências, status terminais) em uma **biblioteca compartilhada**.
+- Design system comum para manter a identidade visual entre MFEs.
+
+## Build e deploy
+
+1. `ng build` em cada projeto.
+2. Upload de cada `dist/` para um bucket estático (ou CDN).
+3. O shell aponta para o `remoteEntry.json` de cada MFE por ambiente.
+
+## Passo a passo de migração (monolito → MFE)
+
+1. Criar o repositório e instalar a federação.
+2. Expor as rotas do MFE.
+3. Copiar os componentes do monolito.
+4. Configurar app e rotas no shell.
+5. Subir os três e testar a integração.
+6. Replicar o processo para o próximo MFE.

@@ -1,0 +1,47 @@
+---
+title: Pacotes
+sidebar_position: 5
+description: Artefatos versionados de uma aplicação. Campos, bloqueio, validação e versões pai.
+---
+
+<Badge color="orange">entidade</Badge>
+
+:::info[Definição]
+O **pacote** (package) é o artefato que será liberado: uma versão concreta de uma aplicação,
+rastreável até o commit, o PR e a story.
+:::
+
+## Campos principais
+
+| Campo | Descrição |
+| --- | --- |
+| `applicationId` | Aplicação dona do pacote |
+| `parentId` | Pacote anterior (auto-referência), usado para saber para onde voltar |
+| `commitSha` | SHA do commit que gerou o pacote |
+| `pullRequestUrl` | PR de origem |
+| `story` | Identificador da história/tarefa (obrigatório) |
+| `isBlocked` | Pacote bloqueado não pode ser liberado |
+| `isActive` | Pacote ativo |
+| `deletedAt` | Soft delete: o pacote some das listagens, mas o histórico permanece |
+
+## Bloqueio de pacote
+
+- Um **rollback** bloqueia automaticamente o pacote atual (`isBlocked = true`) e valida o pacote alvo.
+- Antes de criar releases, o pipeline pode consultar `GET /packages-validations` para saber se o pacote está bloqueado.
+
+## Criação automática
+
+Ao receber `POST /packages`:
+
+1. A aplicação é localizada pelo nome ou **criada automaticamente**.
+2. O pacote é salvo.
+3. Uma **release `WAITING`** é criada para ele.
+
+## Filtros úteis
+
+```http
+GET /v1/packages?applicationName=meu-app&commitSha=abc123
+```
+
+Os filtros combinam com **E**: por aplicação, nome da aplicação e commit. A combinação nome + commit
+retorna no máximo um pacote.
