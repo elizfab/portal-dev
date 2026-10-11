@@ -1,0 +1,73 @@
+---
+title: Como documentar um projeto
+sidebar_position: 2
+description: Padrão leve para escrever a documentação de cada projeto sem acumular arquivos repetidos.
+---
+
+# Como documentar um projeto
+
+O objetivo é manter o contexto pequeno e reaproveitável. Cada projeto deve ter **apenas um README principal** e, quando necessário, um ou dois arquivos complementares no próprio repositório. O `Portal Dev` centraliza o manual geral.
+
+:::warning[Evite]
+Não crie cópias de documentação em `.vscode/docs`, `docs/` dos projetos e no Docusaurus ao
+mesmo tempo. Isso cria versões divergentes.
+:::
+
+## Estrutura mínima do README
+
+Use a ordem abaixo no `README.md` de cada projeto:
+
+```markdown
+# Nome do projeto
+
+> Linha única sobre o que faz.
+
+## 1. Identidade do projeto
+
+| Campo | Valor |
+| --- | --- |
+| slug | nome-do-projeto |
+| Categoria | Frontend / Backend / DevOps |
+| Tipo | pessoal / profissional / estudo |
+| Demo | https://... |
+
+## 2. Como executar
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+## 3. Stack
+
+- Angular 22
+- TypeScript
+- SCSS
+
+## 4. Decisões técnicas
+
+- Por que X em vez de Y.
+
+## 5. Checklist
+
+- [x] Setup
+- [ ] Deploy
+- [ ] Portfólio
+```
+
+## Onde vivem os detalhes
+
+| Tipo de informação | Local correto | Exemplo |
+| --- | --- | --- |
+| Stack, comandos e deploy | `README.md` do projeto | `01.carteira-saude/README.md` |
+| Decisões técnicas longas | `docs/decisoes.md` ou seção no README | `mfe-elizabetefabri-portfolio/docs/` |
+| Guia de uso/comandos pessoais | `Portal Dev` (Docusaurus) | `docs/gestao-projetos/` |
+| Tracking de tarefas | GitHub Project ou issues | [Project 2](https://github.com/orgs/elizfab/projects/2) |
+
+## Template para novo projeto
+
+Copie e adapte o modelo já existente:
+
+- [`frontend/templates/doc-template.mdx`](/docs/guia-de-estilo)
+- [`mfe-elizabetefabri-portfolio/docs/12-padroes-de-repositorio.md`](https://github.com/elizfab/mfe-elizabetefabri-portfolio/blob/main/docs/12-padroes-de-repositorio.md)

@@ -1,0 +1,45 @@
+---
+title: Links, imagens e assets
+sidebar_position: 4
+description: Onde guardar e como referenciar logos, screenshots e links de projetos sem duplicar arquivos.
+---
+
+# Links, imagens e assets
+
+Projetos com prints, logos e links exigem um fluxo simples. Sem isso, os mesmos arquivos acabam dispersos em várias pastas.
+
+## Onde guardar cada tipo de asset
+
+| Asset | Local ideal | Observação |
+| --- | --- | --- |
+| Logo do app | `<projeto>/frontend/public/logo.png` | Vai no build e no README |
+| Screenshots | `<projeto>/frontend/docs/screenshots/` | Gerados automaticamente |
+| Assets do README | `<projeto>/.github/assets/images/` | Logos e prints para o GitHub |
+| Assets do portfólio | `mfe-elizabetefabri-portfolio/public/images/projects/<slug>/` | Copiados do projeto |
+
+## Fluxo de screenshots
+
+1. Gerar no projeto:
+
+```bash title="No projeto"
+cd frontend
+npm run screenshots
+```
+
+2. Validar em `frontend/docs/screenshots/`.
+3. Copiar os selecionados para:
+   - `.github/assets/images/projects-personal/<slug>/` (README do GitHub)
+   - `mfe-elizabetefabri-portfolio/public/images/projects/<slug>/` (portfólio)
+
+:::warning[Nunca use links absolutos]
+Dentro de um micro frontend, links absolutos como `/carteira/dados` quebram quando a rota vira
+`/carteira-saude/carteira/dados`. Use sempre caminhos relativos ao contexto.
+:::
+
+## Checklist de referências
+
+- [ ] Logo no `public/logo.png` do projeto.
+- [ ] README aponta para imagens em `.github/assets/...`.
+- [ ] Portfólio aponta para imagens em `public/images/projects/<slug>/`.
+- [ ] Todos os links internos são relativos ao remote, quando usado dentro do MFE.
+- [ ] A [tabela mestre](/docs/gestao-projetos/mapeamento-de-projetos) tem repo e demo atualizados.

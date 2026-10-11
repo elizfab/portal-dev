@@ -1,0 +1,34 @@
+---
+title: Gestão de projetos
+description: Manual de consulta para mapear, documentar e organizar os projetos da org elizfab sem deixar o contexto crescer demais.
+---
+
+<TechIcon icon="devicon/devicon-original" alt="Gestão de projetos" />
+
+Este espaço guarda o **mapa de todos os projetos** da organização `elizfab`, os padrões usados
+para documentá-los e as ferramentas que ajudam nesse processo.
+
+:::info[Propósito]
+Manter o portfólio organizado desde o início: saber onde cada projeto mora, qual é o escopo,
+quais são os links, imagens e comandos, e como adicionar um novo projeto sem repetir a mesma
+estrutura manualmente.
+:::
+
+## O que você encontra aqui
+
+<DocCardList />
+
+## Visão rápida
+
+```mermaid
+flowchart LR
+    org[org-elizfab] --> portal[00.dev-portal]
+    org --> projetos[01 a 08 projetos]
+    org --> mfe[mfe-elizabetefabri-portfolio]
+    org --> template[template-remote-mfe]
+
+    portal --> docusaurus[Docusaurus Manual]
+    mfe --> shell[Shell host]
+    mfe --> remotes[Remotes]
+    template --> novo[Novo remote]
+```

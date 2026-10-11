@@ -1,6 +1,6 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import type { Config } from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -54,12 +54,12 @@ const config: Config = {
   ],
 
   headTags: [
-    {tagName: 'link', attributes: {rel: 'preconnect', href: 'https://fonts.googleapis.com'}},
-    {tagName: 'link', attributes: {rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous'}},
-    {tagName: 'link', attributes: {rel: 'icon', type: 'image/png', sizes: '32x32', href: `${baseUrl}img/favicon-32x32.png`}},
-    {tagName: 'link', attributes: {rel: 'icon', type: 'image/png', sizes: '16x16', href: `${baseUrl}img/favicon-16x16.png`}},
-    {tagName: 'link', attributes: {rel: 'apple-touch-icon', sizes: '180x180', href: `${baseUrl}img/apple-touch-icon.png`}},
-    {tagName: 'meta', attributes: {name: 'theme-color', content: '#F75F00'}},
+    { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://fonts.googleapis.com' } },
+    { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' } },
+    { tagName: 'link', attributes: { rel: 'icon', type: 'image/png', sizes: '32x32', href: `${baseUrl}img/favicon-32x32.png` } },
+    { tagName: 'link', attributes: { rel: 'icon', type: 'image/png', sizes: '16x16', href: `${baseUrl}img/favicon-16x16.png` } },
+    { tagName: 'link', attributes: { rel: 'apple-touch-icon', sizes: '180x180', href: `${baseUrl}img/apple-touch-icon.png` } },
+    { tagName: 'meta', attributes: { name: 'theme-color', content: '#F75F00' } },
   ],
 
   stylesheets: [
@@ -91,7 +91,7 @@ const config: Config = {
   themeConfig: {
     image: 'img/social-card.png',
     metadata: [
-      {name: 'keywords', content: 'documentação, estudos, devops, cloud, frontend, backend, linux, kubernetes'},
+      { name: 'keywords', content: 'documentação, estudos, devops, cloud, frontend, backend, linux, kubernetes' },
     ],
     colorMode: {
       defaultMode: 'dark',
@@ -121,24 +121,26 @@ const config: Config = {
         srcDark: 'img/logo-white.png',
       },
       items: [
-        {type: 'docSidebar', sidebarId: 'docsSidebar', position: 'left', label: 'Documentação'},
+        { type: 'docSidebar', sidebarId: 'docsSidebar', position: 'left', label: 'Documentação' },
         {
           type: 'dropdown',
           label: 'Categorias',
           position: 'left',
           items: [
-            {label: 'Frontend', to: '/docs/frontend'},
-            {label: 'Backend', to: '/docs/backend'},
-            {label: 'Cloud', to: '/docs/cloud'},
-            {label: 'DevOps', to: '/docs/devops'},
-            {label: 'Release & Rollout', to: '/docs/release'},
-            {label: 'Containers', to: '/docs/containers'},
-            {label: 'Observabilidade', to: '/docs/observability'},
-            {label: 'Sistemas Operacionais', to: '/docs/operatingsystems'},
-            {label: 'Metodologias', to: '/docs/methodologies'},
+            { label: 'Gestão de projetos', to: '/docs/gestao-projetos' },
+            { label: 'Frontend', to: '/docs/frontend' },
+            { label: 'Backend', to: '/docs/backend' },
+            { label: 'Cloud', to: '/docs/cloud' },
+            { label: 'DevOps', to: '/docs/devops' },
+            { label: 'Release & Rollout', to: '/docs/release' },
+            { label: 'Containers', to: '/docs/containers' },
+            { label: 'Observabilidade', to: '/docs/observability' },
+            { label: 'Sistemas Operacionais', to: '/docs/operatingsystems' },
+            { label: 'Metodologias', to: '/docs/methodologies' },
+            { label: 'Gestão de projetos', to: '/docs/gestao-projetos' },
           ],
         },
-        {to: '/docs/guia-de-estilo', label: 'Guia de estilo', position: 'left'},
+        { to: '/docs/guia-de-estilo', label: 'Guia de estilo', position: 'left' },
         {
           href: repoUrl,
           position: 'right',
@@ -159,34 +161,34 @@ const config: Config = {
         {
           title: 'Desenvolvimento',
           items: [
-            {label: 'Frontend', to: '/docs/frontend'},
-            {label: 'Backend', to: '/docs/backend'},
-            {label: 'Metodologias', to: '/docs/methodologies'},
+            { label: 'Frontend', to: '/docs/frontend' },
+            { label: 'Backend', to: '/docs/backend' },
+            { label: 'Metodologias', to: '/docs/methodologies' },
           ],
         },
         {
           title: 'Infraestrutura',
           items: [
-            {label: 'Cloud', to: '/docs/cloud'},
-            {label: 'DevOps', to: '/docs/devops'},
-            {label: 'Release & Rollout', to: '/docs/release'},
-            {label: 'Containers', to: '/docs/containers'},
-            {label: 'Observabilidade', to: '/docs/observability'},
+            { label: 'Cloud', to: '/docs/cloud' },
+            { label: 'DevOps', to: '/docs/devops' },
+            { label: 'Release & Rollout', to: '/docs/release' },
+            { label: 'Containers', to: '/docs/containers' },
+            { label: 'Observabilidade', to: '/docs/observability' },
           ],
         },
         {
           title: 'Sistemas',
           items: [
-            {label: 'Linux', to: '/docs/operatingsystems/linux'},
-            {label: 'Windows', to: '/docs/operatingsystems/windows'},
-            {label: 'macOS e WSL2', to: '/docs/operatingsystems/others'},
+            { label: 'Linux', to: '/docs/operatingsystems/linux' },
+            { label: 'Windows', to: '/docs/operatingsystems/windows' },
+            { label: 'macOS e WSL2', to: '/docs/operatingsystems/others' },
           ],
         },
         {
           title: 'Projeto',
           items: [
-            {label: 'Guia de estilo', to: '/docs/guia-de-estilo'},
-            {label: 'GitHub', href: repoUrl},
+            { label: 'Guia de estilo', to: '/docs/guia-de-estilo' },
+            { label: 'GitHub', href: repoUrl },
           ],
         },
       ],
@@ -215,13 +217,13 @@ const config: Config = {
         'ruby',
       ],
       magicComments: [
-        {className: 'theme-code-block-highlighted-line', line: 'highlight-next-line', block: {start: 'highlight-start', end: 'highlight-end'}},
-        {className: 'code-block-error-line', line: 'error-next-line', block: {start: 'error-start', end: 'error-end'}},
-        {className: 'code-block-success-line', line: 'success-next-line', block: {start: 'success-start', end: 'success-end'}},
+        { className: 'theme-code-block-highlighted-line', line: 'highlight-next-line', block: { start: 'highlight-start', end: 'highlight-end' } },
+        { className: 'code-block-error-line', line: 'error-next-line', block: { start: 'error-start', end: 'error-end' } },
+        { className: 'code-block-success-line', line: 'success-next-line', block: { start: 'success-start', end: 'success-end' } },
       ],
     },
     mermaid: {
-      theme: {light: 'neutral', dark: 'dark'},
+      theme: { light: 'neutral', dark: 'dark' },
     },
   } satisfies Preset.ThemeConfig,
 };

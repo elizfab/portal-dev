@@ -1,0 +1,50 @@
+---
+title: Roadmap e GitHub Project
+sidebar_position: 7
+description: Como usar o Docusaurus junto com o GitHub Project da org para não perder o rumo.
+---
+
+# Roadmap e GitHub Project
+
+A documentação viva depende de um lugar para tarefas. O [GitHub Project 2](https://github.com/orgs/elizfab/projects/2)
+é o kanban da organização. O Docusaurus é o manual. Ambos se completam.
+
+## Divisão de responsabilidade
+
+| Coisa | Vai no Docusaurus | Vai no GitHub Project |
+| --- | --- | --- |
+| Como fazer X | Sim | Não |
+| Status de tarefas | Não | Sim |
+| Decisões técnicas já tomadas | Sim | Não |
+| O que falta fazer | Não | Sim |
+| Padrões de projeto | Sim | Não |
+| Prazos e prioridades | Não | Sim |
+
+## Estrutura sugerida de colunas no Project
+
+1. **Backlog** — ideias e tarefas sem dono.
+2. **A fazer** — tarefas priorizadas para a semana.
+3. **Em progresso** — tarefas em andamento.
+4. **Revisão** — PRs abertos aguardando revisão.
+5. **Concluído** — merge na `main`.
+
+## Labels recomendadas
+
+Use labels simples para não poluir:
+
+| Label | Uso |
+| --- | --- |
+| `tipo:docs` | Melhoria na documentação do Docusaurus |
+| `tipo:projeto` | Novo projeto ou manutenção de projeto existente |
+| `tipo:portfólio` | Integração com o MFE |
+| `prioridade:alta` | Bloqueia outra tarefa |
+| `status:aguardando` | Parado por decisão externa |
+
+## Roadmap de curto prazo
+
+:::tip[Próximos passos sugeridos]
+1. Finalizar a documentação base dos projetos 01 a 05.
+2. Resolver os bloqueios listados no painel de prontidão do MFE.
+3. Integrar os projetos prontos no portfólio MFE.
+4. Avaliar se algum projeto precisa de multi-idioma antes de ativar POEditor.
+:::

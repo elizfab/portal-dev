@@ -1,0 +1,73 @@
+---
+title: Metadados centralizados
+sidebar_position: 9
+description: Modelo de JSON com metadados dos projetos para manter consistência no Docusaurus e no portfólio.
+---
+
+# Metadados centralizados
+
+Manter os metadados dos projetos em um JSON central ajuda a gerar tabelas, portfólio e busca sem
+digitar os mesmos dados várias vezes. Sugestão: crie um arquivo `projects.json` no Docusaurus e use
+como referência.
+
+## Local sugerido
+
+```text
+frontend/data/projects.json
+```
+
+## Estrutura
+
+```json title="projects.json"
+{
+  "projects": [
+    {
+      "slug": "carteira-saude",
+      "title": "Carteira de Saúde e Vacinação",
+      "description": "Aplicação web para gestão pessoal de carteira de vacinação e histórico de saúde.",
+      "category": "Frontend",
+      "typeTag": "saude",
+      "techs": ["Angular 21", "TypeScript", "NgRx", "ng-zorro-antd"],
+      "repo": "https://github.com/elizfab/carteira-saude",
+      "demo": "https://carterinha-vacinacao.vercel.app",
+      "status": "publicado",
+      "localPath": "01.carteira-saude",
+      "image": {
+        "src": "/images/projects/carteira-saude/logo.png",
+        "alt": "Logo da Carteira de Saúde"
+      }
+    },
+    {
+      "slug": "pdi",
+      "title": "PDI",
+      "description": "Apresentação pública do Plano de Desenvolvimento Individual.",
+      "category": "Frontend",
+      "typeTag": "pessoal",
+      "techs": ["Angular 21", "TypeScript", "SCSS", "Jest"],
+      "repo": "https://github.com/elizfab/pdi",
+      "demo": "https://pdi-elizabete.vercel.app",
+      "status": "em-andamento",
+      "localPath": "04.pdi",
+      "image": {
+        "src": "/images/projects/pdi/logo.png",
+        "alt": "Logo do PDI"
+      }
+    }
+  ]
+}
+```
+
+## Mapeamento de status
+
+| Status interno | Badge no Docusaurus |
+| --- | --- |
+| `publicado` | <Badge color="green">publicado</Badge> |
+| `em-andamento` | <Badge color="blue">em andamento</Badge> |
+| `bloqueado` | <Badge color="gray">bloqueado</Badge> |
+| `rascunho` | <Badge color="gray">rascunho</Badge> |
+
+## Próximo passo
+
+Quando o Docusaurus tiver muitos projetos, você pode criar um componente React que leia esse
+`projects.json` e renderize a tabela mestre automaticamente. Até lá, mantenha a tabela em
+[`mapeamento-de-projetos`](/docs/gestao-projetos/mapeamento-de-projetos) manual e sincronizada.

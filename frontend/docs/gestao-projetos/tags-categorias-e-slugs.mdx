@@ -1,0 +1,68 @@
+---
+title: Tags, categorias e slugs
+sidebar_position: 3
+description: Convenção de nomes para classificar projetos de forma consistente no portfólio e na documentação.
+---
+
+# Tags, categorias e slugs
+
+Manter uma convenção única evita duplicidade e facilita buscas no Docusaurus e no portfólio MFE.
+
+## Slugs
+
+O `slug` é o identificador único do projeto. Use **kebab-case**, sem acentos, sem espaços.
+
+:::tip[Regra]
+O slug deve ser igual ao nome do repositório no GitHub.
+:::
+
+| Projeto | Slug | Repositório |
+| --- | --- | --- |
+| Carteira de Saúde e Vacinação | `carteira-saude` | `elizfab/carteira-saude` |
+| Dose Certa | `dosecerta` | `elizfab/dosecerta` |
+| PDI | `pdi` | `elizfab/pdi` |
+
+## Categorias
+
+Use apenas uma categoria principal por projeto:
+
+| Categoria | Quando usar |
+| --- | --- |
+| `Frontend` | Apps Angular, sites, portfólios |
+| `Backend` | APIs, servidores, bancos de dados |
+| `DevOps` | CI/CD, Docker, Terraform, pipelines |
+| `Cloud` | AWS, Azure, GCP, infraestrutura |
+| `Estudo` | Projetos de aprendizado, PoCs |
+
+## Tags (typeTag)
+
+A `typeTag` é uma palavra-chave secundária para agrupar projetos por tema:
+
+| typeTag | Projetos |
+| --- | --- |
+| `saude` | carteira-saude, dosecerta |
+| `pessoal` | pdi, caderno-inteligente |
+| `ecommerce` | suplementos-store |
+| `portfolio` | mfe-elizabetefabri-portfolio |
+| `docs` | portal-dev |
+
+:::info[Campos no portfólio]
+No arquivo `portfolio-personal.data.ts` do MFE, cada projeto usa:
+
+```ts
+{
+  slug: 'carteira-saude',
+  category: 'Frontend',
+  typeTag: 'saude',
+  techs: ['Angular 21', 'TypeScript', 'NgRx'],
+}
+```
+:::
+
+## Checklist de criação
+
+- [ ] Definiu o slug (igual ao repo).
+- [ ] Escolheu uma categoria principal.
+- [ ] Escolheu uma `typeTag`.
+- [ ] Listou as tecnologias em `techs`.
+- [ ] Atualizou a [tabela mestre](/docs/gestao-projetos/mapeamento-de-projetos).

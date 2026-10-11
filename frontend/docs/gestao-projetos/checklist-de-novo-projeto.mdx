@@ -1,0 +1,47 @@
+---
+title: Checklist de novo projeto
+sidebar_position: 8
+description: Lista mínima para criar um novo projeto na org sem esquecer etapas.
+---
+
+# Checklist de novo projeto
+
+Use este checklist toda vez que criar um projeto. Ele evita retrabalho e mantém o padrão da org.
+
+## Antes de começar
+
+- [ ] Definiu o **slug** (igual ao nome do repositório futuro).
+- [ ] Escolheu **categoria**, **typeTag** e **stack**.
+- [ ] Verificou se o projeto será um **app-angular**, **mfe-remote**, **backend-go** etc.
+- [ ] Decidiu se o repositório será **público** ou **privado**.
+
+## Criação
+
+- [ ] Criou o repositório na org `elizfab`.
+- [ ] Clonou/criou a pasta em `/home/elizabetefabri/repos/projetos-pessoais/portfolio/org-elizfab/`.
+- [ ] Seguiu o template adequado:
+  - Angular standalone: use `.vscode/docs/passo-02.criar-novo-angular.md`
+  - MFE remote: use `template-remote-mfe`
+- [ ] Criou `elizfab.json` com o tipo do repositório.
+- [ ] Criou `README.md` mínimo.
+- [ ] Criou `.env.example` (mesmo que vazio) e nunca versionou `.env`.
+
+## Documentação e portfólio
+
+- [ ] Adicionou o projeto na [tabela mestre](/docs/gestao-projetos/mapeamento-de-projetos).
+- [ ] Se for usar no portfólio, preparou logo e screenshots.
+- [ ] Atualizou `mfe-elizabetefabri-portfolio/public/images/projects/<slug>/`.
+- [ ] Se for remote do MFE, seguiu [docs/05-adicionar-projetos.md](https://github.com/elizfab/mfe-elizabetefabri-portfolio/blob/main/docs/05-adicionar-projetos.md).
+
+## Antes de publicar
+
+- [ ] Build passa: `npm run build`.
+- [ ] Testes passam: `npm run test`.
+- [ ] Lint passa: `npm run lint`.
+- [ ] Deploy realizado.
+- [ ] Demo e repo atualizados na tabela mestre.
+
+:::tip[Enxugamento]
+Se o projeto é um rascunho sem nome definido, coloque-o na tabela mestre com status
+<Badge color="gray">rascunho</Badge> e volte a completar o checklist quando amadurecer.
+:::
